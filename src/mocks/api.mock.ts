@@ -1,7 +1,7 @@
 /* This is file contains api-mock-response to help you develop UI without real API side */
 
 import webpackMockServer from "webpack-mock-server";
-import apiEndpoints from "./api.endpoints";
+import apiEndpoints from "../api.endpoints";
 
 const mockData = {
   id: 1,
