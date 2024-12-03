@@ -1,0 +1,9 @@
+@mixin mainMixin {
+  background-image: url("images/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 99vh;
+  min-width: 99vw;
+  padding: 1vh 0;
+}

@@ -1,1 +1,14 @@
+@use "sass:color";
+
+@function hooveringColor($c) {
+  @return color.adjust($c, $lightness: 40%);
+}
+
 $basicColor: #575e72;
+$layoutFontColor: #f8f9fa;
+$pageMargin: 15px;
+$layoutBackgroundColor: #3d3c3d;
+$hooverBackgroundColor: hooveringColor($layoutBackgroundColor);
+
+// footer
+$footerBottomBorder: 3px solid purple;
