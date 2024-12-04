@@ -1,9 +1,8 @@
 @mixin mainMixin {
-  background-image: url("images/background.jpg");
-  background-position: center;
+  background-image: $mainBackgroundImage;
+  background-position: top left;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 99vh;
+  height: 100vh;
   min-width: 99vw;
-  padding: 1vh 0;
 }

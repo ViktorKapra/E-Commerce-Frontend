@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "@/components/home/homePage";
 import AboutPage from "@/components/about/aboutPage";
 import ProductPage from "@/components/product/productPage";
-import { HOME_PAGE, ABOUT_PAGE, PRODUCT_PAGE } from "@/routing/Links";
+import { HOME_PAGE, ABOUT_PAGE, PRODUCT_PAGE } from "@/routing/links";
 
 export default function Routing(): JSX.Element {
   return (

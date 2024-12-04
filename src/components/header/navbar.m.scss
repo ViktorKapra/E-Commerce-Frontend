@@ -1,14 +1,7 @@
-@mixin onFocus {
-  border-bottom: 4px solid purple;
-  background-color: $hooverBackgroundColor;
-  transform: scale(1.5);
-}
-
 .navBar {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 90%;
   margin-right: $pageMargin;
   background-color: inherit;
 }
@@ -17,15 +10,13 @@
   color: $layoutFontColor;
   text-decoration: none;
   font-size: medium;
-  position: sticky;
   height: 100%;
   padding: 20px 20px 11px 20px;
 }
 
-.navButton:focus {
-  @include onFocus;
-}
-
+.navButton:focus,
 .navButton:hover {
-  @include onFocus;
+  border-bottom: 5px solid $navButtonBorderColor;
+  background-color: $hooverBackgroundColor;
+  transform: scale(1.5);
 }

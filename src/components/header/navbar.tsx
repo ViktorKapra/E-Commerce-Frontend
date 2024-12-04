@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { ABOUT_PAGE, HOME_PAGE, PRODUCT_PAGE } from "@/routing/Links";
+import { ABOUT_PAGE, HOME_PAGE, PRODUCT_PAGE } from "@/routing/links";
 import * as styles from "./navbar.m.scss";
 
 export default function Navbar() {
@@ -11,7 +11,7 @@ export default function Navbar() {
           className={styles.navButton}
           end
           style={({ isActive }) => ({
-            color: isActive ? "red" : " ",
+            background: isActive ? "$hooverBackgroundColor" : " ",
           })}
         >
           Home
@@ -22,7 +22,7 @@ export default function Navbar() {
           className={styles.navButton}
           end
           style={({ isActive }) => ({
-            color: isActive ? "red" : " ",
+            background: isActive ? "$hooverBackgroundColor" : " ",
           })}
         >
           Products
@@ -33,7 +33,7 @@ export default function Navbar() {
           className={styles.navButton}
           end
           style={({ isActive }) => ({
-            color: isActive ? "red" : " ",
+            background: isActive ? "$hooverBackgroundColor" : " ",
           })}
         >
           About
