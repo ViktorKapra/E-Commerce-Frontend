@@ -6,36 +6,15 @@ export default function Navbar() {
   return (
     <header className={styles.navBar}>
       <nav>
-        <NavLink
-          to={HOME_PAGE}
-          className={styles.navButton}
-          end
-          style={({ isActive }) => ({
-            background: isActive ? "$hooverBackgroundColor" : " ",
-          })}
-        >
+        <NavLink to={HOME_PAGE} className={styles.navButton} end>
           Home
         </NavLink>
 
-        <NavLink
-          to={PRODUCT_PAGE}
-          className={styles.navButton}
-          end
-          style={({ isActive }) => ({
-            background: isActive ? "$hooverBackgroundColor" : " ",
-          })}
-        >
+        <NavLink to={PRODUCT_PAGE} className={styles.navButton} end>
           Products
         </NavLink>
 
-        <NavLink
-          to={ABOUT_PAGE}
-          className={styles.navButton}
-          end
-          style={({ isActive }) => ({
-            background: isActive ? "$hooverBackgroundColor" : " ",
-          })}
-        >
+        <NavLink to={ABOUT_PAGE} className={styles.navButton} end>
           About
         </NavLink>
       </nav>
