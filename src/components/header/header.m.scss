@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 50px;
+  background: $layoutBackgroundColor;
+}
+
+.h1 {
+  background: inherit;
+  color: $layoutFontColor;
+  font-size: 20px;
+  margin-left: $pageMargin;
+  margin-top: $pageMargin;
+}

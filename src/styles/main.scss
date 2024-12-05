@@ -11,7 +11,8 @@ body {
   // prettier-ignore
   font: 14px "OpenSans-Regular", sans-serif;
   min-height: 100vh;
-  background: top / contain url(images/background.svg) no-repeat;
+  display: flex;
+  margin: 0;
 }
 
 h1 {
@@ -20,6 +21,7 @@ h1 {
 }
 
 h2 {
+  margin: 0;
   font-size: 2em;
   /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
   height: fit-content; /* test for autoprefixer in postcss */

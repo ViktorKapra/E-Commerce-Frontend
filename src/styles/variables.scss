@@ -1,1 +1,13 @@
+@use "sass:color";
+
 $basicColor: #575e72;
+$layoutFontColor: #dee5ed;
+$mainBackgroundImage: url("images/background.jpg");
+$pageMargin: 10px;
+$layoutBackgroundColor: #121212;
+$hooverBackgroundColor: color.adjust($layoutBackgroundColor, $lightness: 40%);
+// header
+// navigation button
+$navButtonBorderColor: #9a33cc;
+// footer
+$footerBorderColor: #9a33cb;
