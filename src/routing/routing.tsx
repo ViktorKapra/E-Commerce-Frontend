@@ -14,7 +14,7 @@ export default function Routing(): JSX.Element {
           <Route path={HOME_PAGE} element={<HomePage />} />
           <Route path={ABOUT_PAGE} element={<AboutPage />} />
           <Route path={PRODUCT_PAGE} element={<ProductPage />} />
-          <Route path="/*" element={<Navigate to="/" replace />} />
+          <Route path="/*" element={<Navigate to={HOME_PAGE} replace />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>
