@@ -10,11 +10,10 @@ export default function Routing(): JSX.Element {
     <BrowserRouter>
       <MainLayout>
         <Routes>
-          <Route index element={<HomePage />} />
-          <Route path={HOME_PAGE} element={<HomePage />} />
+          <Route index path={HOME_PAGE} element={<HomePage />} />
           <Route path={ABOUT_PAGE} element={<AboutPage />} />
           <Route path={PRODUCT_PAGE} element={<ProductPage />} />
-          <Route path="/*" element={<Navigate to={HOME_PAGE} replace />} />
+          <Route path="*" element={<Navigate to={HOME_PAGE} replace />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>
