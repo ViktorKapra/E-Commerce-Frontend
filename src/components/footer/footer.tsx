@@ -3,7 +3,7 @@ import riotLogo from "images/footer/riotGames.svg";
 import rockstarLogo from "images/footer/rockstarGamesLogo.svg";
 import * as styles from "./footer.m.scss";
 
-export default function Header() {
+export default function Footer() {
   return (
     <footer className={styles.footer}>
       <p className={styles.p}> Incredible slogan</p>

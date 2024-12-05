@@ -16,7 +16,7 @@
 
 .navButton:focus,
 .navButton:hover,
-.navButton:active {
+.navButtonActive {
   border-bottom: 5px solid $navButtonBorderColor;
   background-color: $hooverBackgroundColor;
   transform: scale(1.5);
