@@ -1,5 +1,3 @@
-"use client";
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import MainLayout from "@/components/main/mainLayout";
 import HomePage from "@/components/home/homePage";
