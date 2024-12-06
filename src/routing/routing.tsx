@@ -1,11 +1,14 @@
+"use client";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import MainLayout from "@/components/main/mainLayout";
 import HomePage from "@/components/home/homePage";
 import AboutPage from "@/components/about/aboutPage";
 import ProductPage from "@/components/product/productPage";
 import { HOME_PAGE, ABOUT_PAGE, PRODUCT_PAGE } from "@/routing/links";
+import { ReactNode } from "react";
 
-export default function Routing(): JSX.Element {
+export default function Routing(): ReactNode {
   return (
     <BrowserRouter>
       <MainLayout>

@@ -1,4 +1,4 @@
-export default function HomePage(): JSX.Element {
+export default function HomePage() {
   return (
     <section>
       <h2>Wellcome to home page!</h2>
