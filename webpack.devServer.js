@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
       ],
       hot: true,
       historyApiFallback: {
-        // provide index.html instead of 404:not found error (for SPA app)
+        // provide index.html instead of 404:not found fallback (for SPA app)
         rewrites: [
           { from: /favicon.ico/, to: "public/favicon.ico" }, // provide favicon
         ],

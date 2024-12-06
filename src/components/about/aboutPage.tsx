@@ -1,4 +1,4 @@
-export default function AboutPage(): JSX.Element {
+export default function AboutPage() {
   return (
     <section>
       <h2>Wellcome to about page!</h2>
