@@ -1,4 +1,4 @@
-export default function ProductPage(): JSX.Element {
+export default function ProductPage() {
   return (
     <section>
       <h2>Wellcome to product page!</h2>
