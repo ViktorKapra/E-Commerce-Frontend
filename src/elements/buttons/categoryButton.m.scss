@@ -1,0 +1,25 @@
+.categoryButton {
+  height: 200px;
+  width: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: $layoutBackgroundColor;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+  border: $categoryButtonColor solid;
+  border-width: 1px 1px 5px 1px;
+}
+
+.image {
+  max-width: 100%;
+  width: 100px;
+  height: auto;
+  margin: 40px 30% 0 30%;
+}
+
+.p {
+  color: $layoutFontColor;
+}

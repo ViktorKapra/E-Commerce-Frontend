@@ -10,6 +10,9 @@ const mockData = {
   email: "willsmith321@gmail.com",
 };
 
+const mockTopProducts = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
 export default webpackMockServer.add((app) => {
   app.get(apiEndpoints.testMock, (_req, res) => res.json(mockData));
+  app.get(apiEndpoints.topProducts, (_req, res) => res.json(mockTopProducts));
 });

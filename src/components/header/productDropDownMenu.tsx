@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router";
+import { PC, XBOX, PLAYSTATION } from "@/routing/links";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -42,9 +43,9 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => handleSelect("pc")}>PC</MenuItem>
-        <MenuItem onClick={() => handleSelect("playstation")}>Playstaion 5</MenuItem>
-        <MenuItem onClick={() => handleSelect("xbox")}>Xbox</MenuItem>
+        <MenuItem onClick={() => handleSelect(PC)}>PC</MenuItem>
+        <MenuItem onClick={() => handleSelect(PLAYSTATION)}>Playstaion 5</MenuItem>
+        <MenuItem onClick={() => handleSelect(XBOX)}>Xbox</MenuItem>
       </Menu>
     </>
   );
