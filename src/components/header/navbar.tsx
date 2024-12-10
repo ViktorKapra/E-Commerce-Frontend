@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
-import { ABOUT_PAGE, HOME_PAGE, PRODUCT_PAGE, SIGNIN_PAGE, SIGNUP_PAGE } from "@/routing/links";
+import { ABOUT_PAGE, HOME_PAGE, SIGNIN_PAGE, SIGNUP_PAGE } from "@/routing/links";
 import clsx from "clsx";
+import ProductDropDownMenu from "./productDropDownMenu";
 import * as styles from "./navbar.m.scss";
 
 export default function Navbar() {
@@ -10,11 +11,7 @@ export default function Navbar() {
         <NavLink to={HOME_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
           Home
         </NavLink>
-
-        <NavLink to={PRODUCT_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
-          Products
-        </NavLink>
-
+        <ProductDropDownMenu />
         <NavLink to={ABOUT_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
           About
         </NavLink>
