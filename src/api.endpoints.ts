@@ -1,6 +1,6 @@
 const apiEndpoints = {
   testMock: "/api/testMock",
-  topProducts: "/api/topProducts",
+  topProducts: "/api/products/top",
 };
 
 export default apiEndpoints;
