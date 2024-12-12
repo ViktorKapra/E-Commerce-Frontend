@@ -36,16 +36,14 @@ export default function HomePage() {
     }
   };
 
-  const categoriesButtons = [
-    <CategoryButton key="pc_button" src={PC_LOGO} category="PC" onClick={() => handleClick(PC)} />,
-    <CategoryButton key="xbox_button" src={XBOX_LOGO} category="XBox One" onClick={() => handleClick(XBOX)} />,
-    <CategoryButton key="playstation_button" src={PLAYSTATION_LOGO} category="Playstation 5" onClick={() => handleClick(PLAYSTATION)} />,
-  ];
-
   return (
     <section className={styles.section}>
-      <h2>Wellcome to home page!</h2>
-      <NamedSectionForElements name="Categories">{categoriesButtons}</NamedSectionForElements>
+      <h2>Welcome to home page!</h2>
+      <NamedSectionForElements name="Categories">
+        <CategoryButton key="pc_button" src={PC_LOGO} category="PC" onClick={() => handleClick(PC)} />
+        <CategoryButton key="xbox_button" src={XBOX_LOGO} category="XBox One" onClick={() => handleClick(XBOX)} />
+        <CategoryButton key="playstation_button" src={PLAYSTATION_LOGO} category="Playstation 5" onClick={() => handleClick(PLAYSTATION)} />
+      </NamedSectionForElements>
       <NamedSectionForElements name="New Games">
         {loading ? (
           <p>Loading...</p>
