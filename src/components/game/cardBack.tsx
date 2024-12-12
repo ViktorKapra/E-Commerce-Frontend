@@ -8,7 +8,9 @@ export default function CardBack({ game }: { game: Game }) {
         {game.description} <br />
       </p>
       <p> Rate {game.rating}</p>
-      <button type="submit">Add to chart</button>
+      <button className={styles.button} type="submit">
+        Add to chart
+      </button>
     </div>
   );
 }

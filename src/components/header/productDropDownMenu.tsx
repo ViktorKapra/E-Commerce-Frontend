@@ -3,7 +3,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router";
-import { PC, XBOX, PLAYSTATION } from "@/routing/links";
+import { PC, XBOX, PLAYSTATION, PRODUCT_PAGE } from "@/routing/links";
+import clsx from "clsx";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -19,7 +20,7 @@ export default function BasicMenu() {
     handleClose();
     console.log("Product category", selectedValue, "was selected");
     if (selectedValue) {
-      navigate(`/products/${selectedValue}`);
+      navigate(clsx(PRODUCT_PAGE, "/", selectedValue));
     }
   };
 
