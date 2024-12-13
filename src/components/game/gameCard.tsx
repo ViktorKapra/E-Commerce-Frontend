@@ -1,18 +1,23 @@
 import { Game } from "@/types/game.types";
+import { useState } from "react";
+import clsx from "clsx";
 import * as styles from "./gameCard.m.scss";
 import CardBack from "./cardBack";
 import CardFront from "./cardFront";
 
 export default function GameCard({ game }: { game: Game }) {
+  const [isFlipped, setFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setFlipped(!isFlipped);
+  };
+
   return (
-    <>
-      <div className={styles.flipCard}>
-        <div className={styles.flipCardInner}>
-          <CardFront game={game} />
-          <CardBack game={game} />
-        </div>
+    <div className={clsx(styles.flipCard, { [styles.flipCardFlipped]: isFlipped })} onMouseEnter={handleFlip} onMouseLeave={handleFlip}>
+      <div className={styles.flipCardInner}>
+        <CardFront isShown={!isFlipped} game={game} />
+        <CardBack isShown={isFlipped} game={game} />
       </div>
-      <p> </p>
-    </>
+    </div>
   );
 }

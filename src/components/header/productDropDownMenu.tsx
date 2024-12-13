@@ -30,6 +30,7 @@ export default function BasicMenu() {
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
+        sx={{ color: "#dee5ed" }}
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
@@ -44,9 +45,15 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => handleSelect(PC)}>PC</MenuItem>
-        <MenuItem onClick={() => handleSelect(PLAYSTATION)}>Playstaion 5</MenuItem>
-        <MenuItem onClick={() => handleSelect(XBOX)}>Xbox</MenuItem>
+        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(PC)}>
+          PC
+        </MenuItem>
+        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(PLAYSTATION)}>
+          Playstaion 5
+        </MenuItem>
+        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(XBOX)}>
+          Xbox
+        </MenuItem>
       </Menu>
     </>
   );

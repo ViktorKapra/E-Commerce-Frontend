@@ -10,7 +10,8 @@ const mockDataGames: Game[] = [
     name: "Overwatch",
     description: "Description for game 1",
     price: 23.99,
-    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/minecraft_xfzfix.jpg",
+
+    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/overwatch_yosx4o.jpg",
     platforms: ["PC"],
     dateCreated: new Date("2016-5-24"),
     totalRating: 5,
@@ -21,7 +22,7 @@ const mockDataGames: Game[] = [
     name: "MineCraft",
     description: "Description for game 2",
     price: 25.99,
-    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/overwatch_yosx4o.jpg",
+    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/minecraft_xfzfix.jpg",
     platforms: ["PC", "XBox One", "Playstation 5"],
     dateCreated: new Date("2009-5-19"),
     totalRating: 4.5,
@@ -50,4 +51,12 @@ const mockData = {
 export default webpackMockServer.add((app) => {
   app.get(apiEndpoints.testMock, (_req, res) => res.json(mockData));
   app.get(apiEndpoints.topProducts, (_req, res) => res.json(mockDataGames));
+  app.get("/api/search/:text", (req, res) => {
+    const { text } = req.params;
+    if (!text.includes("/")) {
+      const matchedGames = mockDataGames.filter((game) => game.name.toLowerCase().includes(text.toLowerCase()));
+      return res.json(matchedGames.slice(0, 5));
+    }
+    return res.status(400).send("Invalid search text");
+  });
 });
