@@ -1,10 +1,11 @@
 import { Game } from "@/types/game.types";
 import * as styles from "@/components/game/cardFront.m.scss";
 import StarContainer from "@/components/game/starContainer";
+import clsx from "clsx";
 
-export default function CardFront({ game }: { game: Game }) {
+export default function CardFront({ game, isShown }: { game: Game; isShown: boolean }) {
   return (
-    <div className={styles.flipCardFront}>
+    <div className={clsx(styles.flipCardFront, { [styles.visible]: isShown }, { [styles.invisible]: !isShown })}>
       <img className={styles.image} src={game.image} alt={game.name} />
       <div className={styles.gameInfo}>
         <div className={styles.namePriceContainer}>
