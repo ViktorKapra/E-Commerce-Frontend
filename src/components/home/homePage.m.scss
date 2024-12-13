@@ -5,3 +5,30 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.searchHolder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  width: 100%;
+  max-width: 600px;
+  height: 50px;
+  padding: 10px;
+  background-color: $sectionBackgroundColor;
+  color: $categoryButtonColor;
+  border-radius: 20px;
+  box-shadow: 0 0 1px 1px $layoutFontColor;
+  border-width: 1px 1px 1px 1px;
+  font-size: large;
+}
+
+.resultContainer {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+}

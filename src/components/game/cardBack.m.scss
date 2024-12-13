@@ -33,7 +33,7 @@
 
 .button:hover,
 .button:focus {
-  background-color: black;
+  background-color: $layoutBackgroundColor;
 }
 
 @keyframes changeVisibility {

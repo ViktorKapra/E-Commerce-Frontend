@@ -1,10 +1,10 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router";
 import { PC, XBOX, PLAYSTATION, PRODUCT_PAGE } from "@/routing/links";
-import clsx from "clsx";
+import ARROW from "@/assets/images/icons/arrowDrop.svg";
+import * as styles from "./productDropDownMenu.m.scss";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -20,38 +20,37 @@ export default function BasicMenu() {
     handleClose();
     console.log("Product category", selectedValue, "was selected");
     if (selectedValue) {
-      navigate(clsx(PRODUCT_PAGE, "/", selectedValue));
+      navigate(`${PRODUCT_PAGE}/${selectedValue}`);
     }
   };
 
   return (
     <>
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        sx={{ color: "#dee5ed" }}
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
+      <button className={styles.generalButton} type="button" onClick={handleClick}>
         Products
-      </Button>
+        <img className={styles.arrow} src={ARROW} alt="arrow-down" />
+      </button>
       <Menu
         id="product-category-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        sx={{
+          "& .MuiPaper-root": {
+            backgroundColor: "#121212",
+          },
+        }}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(PC)}>
+        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(PC)}>
           PC
         </MenuItem>
-        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(PLAYSTATION)}>
+        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(PLAYSTATION)}>
           Playstaion 5
         </MenuItem>
-        <MenuItem sx={{ color: "#dee5ed", backgroundColor: "#121212" }} onClick={() => handleSelect(XBOX)}>
+        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(XBOX)}>
           Xbox
         </MenuItem>
       </Menu>

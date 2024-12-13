@@ -61,16 +61,17 @@ export default function HomePage() {
 
   return (
     <section className={styles.section}>
-      <h2>Welcome to home page!</h2>
-      <input placeholder="Search" onChange={_.debounce(searchGame, 300)} />
-      {searchedGames.length > 0
-        ? searchedGames.map((game) => (
-            <button type="submit" key={game.id} onClick={() => chooseGame(game.name)}>
-              {" "}
-              {game.name}{" "}
-            </button>
-          ))
-        : null}
+      <div className={styles.searchHolder}>
+        <input placeholder="Search" className={styles.search} onChange={_.debounce(searchGame, 300)} />
+        {searchedGames.length > 0
+          ? searchedGames.map((game) => (
+              <button className={styles.resultContainer} type="submit" key={game.id} onClick={() => chooseGame(game.name)}>
+                {" "}
+                {game.name}{" "}
+              </button>
+            ))
+          : null}
+      </div>
       <NamedSectionForElements name="Categories">
         <CategoryButton key="pc_button" src={PC_LOGO} category="PC" onClick={() => handleClick(PC)} />
         <CategoryButton key="xbox_button" src={XBOX_LOGO} category="XBox One" onClick={() => handleClick(XBOX)} />

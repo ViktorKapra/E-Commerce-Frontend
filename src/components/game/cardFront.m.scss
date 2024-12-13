@@ -10,6 +10,7 @@
   align-items: center;
   flex-direction: column;
   box-shadow: 0 0 5px 1px $navButtonBorderColor;
+  transform: rotateY(180deg);
   //backface-visibility: hidden;
   //-moz-backface-visibility: hidden;
 }
@@ -26,7 +27,7 @@
   font-size: 20px;
   font-family: Verdana, sans-serif;
   font-weight: bold;
-  color: #fff;
+  color: $layoutFontColor;
 }
 
 .image {
