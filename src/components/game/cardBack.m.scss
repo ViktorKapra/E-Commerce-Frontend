@@ -5,8 +5,8 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  background-color: $layoutBackgroundColor;
-  box-shadow: 0 0 5px 1px $navButtonBorderColor;
+  background-color: $primaryBlack;
+  box-shadow: 0 0 5px 1px $primaryPurple;
   border-radius: 15px;
   position: absolute;
   width: 100%;
@@ -27,13 +27,13 @@
   max-width: 120px;
   border-width: 0;
   border-radius: 10px;
-  color: $layoutFontColor;
-  background-color: $navButtonBorderColor;
+  color: $primaryWhite;
+  background-color: $primaryPurple;
 }
 
 .button:hover,
 .button:focus {
-  background-color: $layoutBackgroundColor;
+  background-color: $primaryPurpleLighten;
 }
 
 @keyframes changeVisibility {

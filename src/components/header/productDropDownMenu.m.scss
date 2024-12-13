@@ -1,6 +1,6 @@
 .generalButton {
-  color: $layoutFontColor;
-  background-color: $layoutBackgroundColor;
+  color: $primaryWhite;
+  background-color: $primaryBlack;
   text-decoration: none;
   font-size: medium;
   max-height: 100%;
@@ -10,18 +10,18 @@
 
 .generalButton:hover,
 .generalButton.focus {
-  border-bottom: 5px solid $navButtonBorderColor;
+  border-bottom: 5px solid $primaryPurple;
   background-color: $hooverBackgroundColor;
 }
 
 .menuItem {
-  color: $layoutFontColor;
-  background-color: $layoutBackgroundColor;
+  color: $primaryWhite;
+  background-color: $primaryBlack;
   border-radius: 0;
 }
 
 .arrow {
-  color: $layoutFontColor;
+  color: $primaryWhite;
   width: 20px;
   height: 20px;
 }

@@ -8,7 +8,7 @@
 }
 
 .navButton {
-  color: $layoutFontColor;
+  color: $primaryWhite;
   text-decoration: none;
   font-size: medium;
   height: 100%;
@@ -18,7 +18,7 @@
 .navButton:focus,
 .navButton:hover,
 .navButtonActive {
-  border-bottom: 5px solid $navButtonBorderColor;
+  border-bottom: 5px solid $primaryPurple;
   background-color: $hooverBackgroundColor;
   transform: scale(1.5);
 }

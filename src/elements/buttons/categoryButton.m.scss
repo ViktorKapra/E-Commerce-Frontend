@@ -4,13 +4,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: $layoutBackgroundColor;
+  background-color: $primaryBlack;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 8px;
-  border: $categoryButtonColor solid;
+  border: $secondaryWhite solid;
   border-width: 1px 1px 5px 1px;
 }
 
@@ -23,5 +23,5 @@
 }
 
 .p {
-  color: $layoutFontColor;
+  color: $primaryWhite;
 }
