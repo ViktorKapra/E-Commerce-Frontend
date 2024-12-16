@@ -13,8 +13,8 @@ export async function getTopGames(): Promise<Game[]> {
 
     return data;
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
+    console.log("Error fetching data:", error);
+    return Promise.reject(Error("Unable to fetch."));
   }
 }
 export async function getSearchGames(text: string): Promise<Game[]> {

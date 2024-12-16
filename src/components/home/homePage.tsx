@@ -26,8 +26,7 @@ export default function HomePage() {
         }
       })
       .catch((err) => {
-        console.log(err);
-        console.error("Unable to Fetch!");
+        console.error(err);
       });
   }, []);
 
