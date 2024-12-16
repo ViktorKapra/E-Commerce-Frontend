@@ -5,12 +5,12 @@
   align-items: baseline;
   height: 50px;
   width: 100%;
-  background: $layoutBackgroundColor;
+  background: $primaryBlack;
 }
 
 .h1 {
   background: inherit;
-  color: $layoutFontColor;
+  color: $primaryWhite;
   font-size: 20px;
   margin-left: $pageMargin;
   margin-top: $pageMargin;

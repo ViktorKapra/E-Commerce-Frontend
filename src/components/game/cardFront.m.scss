@@ -1,0 +1,70 @@
+.flipCardFront {
+  background-color: $primaryBlack;
+  border-radius: 15px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 5px 1px $primaryPurple;
+  transform: rotateY(180deg);
+  //backface-visibility: hidden;
+  //-moz-backface-visibility: hidden;
+}
+
+.visible {
+  animation: changeVisibility 0.5s forwards;
+}
+
+.invisible {
+  animation: changeVisibility 0.5s backwards;
+}
+
+.h3 {
+  font-size: 20px;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  color: $primaryWhite;
+}
+
+.image {
+  width: 100%;
+  height: 225px;
+  border-radius: 15px 15px 0 0;
+  margin: 0 auto;
+}
+
+.gameInfo {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.gameInfo h4,
+p {
+  color: #fff;
+  margin: 5px;
+}
+
+.namePriceContainer {
+  margin: 0 0 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes changeVisibility {
+  0% {
+    visibility: hidden;
+  }
+
+  100% {
+    visibility: visible;
+  }
+}

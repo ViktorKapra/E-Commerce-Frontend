@@ -1,13 +1,18 @@
 @use "sass:color";
 
 $basicColor: #575e72;
-$layoutFontColor: #dee5ed;
+$primaryWhite: #dee5ed;
+$secondaryWhite: #ffff;
+$starColor: #fae272;
+$sectionBackgroundColor: rgba(0, 0, 0, 0.5);
 $mainBackgroundImage: url("images/background.jpg");
 $pageMargin: 10px;
-$layoutBackgroundColor: #121212;
-$hooverBackgroundColor: color.adjust($layoutBackgroundColor, $lightness: 40%);
+$primaryBlack: #121212;
+
+$hooverBackgroundColor: color.adjust($primaryBlack, $lightness: 40%);
 // header
 // navigation button
-$navButtonBorderColor: #9a33cc;
+$primaryPurple: #9a33cc;
+$primaryPurpleLighten: color.adjust($primaryPurple, $lightness: 10%);
 // footer
 $footerBorderColor: #9a33cb;

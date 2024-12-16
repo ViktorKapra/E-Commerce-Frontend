@@ -1,8 +1,7 @@
 import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
-import { Component, ErrorInfo /* , StrictMode */ } from "react";
+import { Component, ErrorInfo, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { ErrorBoundary } from "react-error-boundary";
 import Routing from "./routing/routing";
 import apiEndpoints from "./api.endpoints";
 
@@ -37,11 +36,9 @@ class AppContainer extends Component<Props, State> {
 
   render() {
     return (
-      // <StrictMode>
-      <ErrorBoundary fallback={<h1> Something went wrong!</h1>}>
+      <StrictMode>
         <Routing />
-      </ErrorBoundary>
-      // </StrictMode>
+      </StrictMode>
     );
   }
 }
