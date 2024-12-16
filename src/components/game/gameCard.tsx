@@ -13,10 +13,12 @@ export default function GameCard({ game }: { game: Game }) {
   };
 
   return (
-    <div className={clsx(styles.flipCard, { [styles.flipCardFlipped]: isFlipped })} onMouseEnter={handleFlip} onMouseLeave={handleFlip}>
-      <div className={styles.flipCardInner}>
-        <CardFront isShown={!isFlipped} game={game} />
-        <CardBack isShown={isFlipped} game={game} />
+    <div onMouseEnter={handleFlip} onMouseLeave={handleFlip}>
+      <div className={clsx(styles.flipCard, { [styles.flipCardFlipped]: isFlipped })}>
+        <div className={styles.flipCardInner}>
+          <CardFront isShown={!isFlipped} game={game} />
+          <CardBack isShown={isFlipped} game={game} />
+        </div>
       </div>
     </div>
   );

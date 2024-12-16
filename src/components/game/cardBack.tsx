@@ -14,7 +14,7 @@ export default function CardBack({ game, isShown }: { game: Game; isShown: boole
         onClick={() => {
           alert("click");
         }}
-        type="submit"
+        type="button"
       >
         Add to chart
       </button>

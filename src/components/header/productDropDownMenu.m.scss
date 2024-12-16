@@ -12,6 +12,7 @@
 .generalButton.focus {
   border-bottom: 5px solid $primaryPurple;
   background-color: $hooverBackgroundColor;
+  cursor: pointer;
 }
 
 .menuItem {

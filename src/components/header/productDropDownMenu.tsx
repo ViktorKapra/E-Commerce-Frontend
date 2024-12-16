@@ -18,7 +18,6 @@ export default function BasicMenu() {
   const navigate = useNavigate();
   const handleSelect = (selectedValue: string) => {
     handleClose();
-    console.log("Product category", selectedValue, "was selected");
     if (selectedValue) {
       navigate(`${PRODUCT_PAGE}/${selectedValue}`);
     }
@@ -39,18 +38,54 @@ export default function BasicMenu() {
           "& .MuiPaper-root": {
             backgroundColor: "#121212",
           },
+          "& .MuiList-root": {
+            padding: "0",
+          },
         }}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(PC)}>
+        <MenuItem
+          sx={{
+            "& ": {
+              color: "#dee5ed",
+            },
+            "&:hover": {
+              backgroundColor: "#272727",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => handleSelect(PC)}
+        >
           PC
         </MenuItem>
-        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(PLAYSTATION)}>
+        <MenuItem
+          sx={{
+            "& ": {
+              color: "#dee5ed",
+            },
+            "&:hover": {
+              backgroundColor: "#272727",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => handleSelect(PLAYSTATION)}
+        >
           Playstaion 5
         </MenuItem>
-        <MenuItem sx={{ color: "#dee5ed" }} onClick={() => handleSelect(XBOX)}>
+        <MenuItem
+          sx={{
+            "& ": {
+              color: "#dee5ed",
+            },
+            "&:hover": {
+              backgroundColor: "#272727",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => handleSelect(XBOX)}
+        >
           Xbox
         </MenuItem>
       </Menu>

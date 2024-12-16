@@ -20,7 +20,6 @@ export async function getTopGames(): Promise<Game[]> {
 export async function getSearchGames(text: string): Promise<Game[]> {
   try {
     const url = `${apiEndpoints.searchProducts}${text}`;
-    console.log(url);
     const response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {
@@ -28,10 +27,9 @@ export async function getSearchGames(text: string): Promise<Game[]> {
       return Promise.reject(new Error("Unable to fetch."));
     }
     const data: Game[] = await response.json();
-
     return data;
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
+    console.log("Error fetching data:", error);
+    return Promise.reject(Error("Unable to fetch."));
   }
 }

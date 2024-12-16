@@ -14,6 +14,11 @@
   border-width: 1px 1px 5px 1px;
 }
 
+.categoryButton:hover {
+  border-color: $primaryPurple;
+  cursor: pointer;
+}
+
 .image {
   max-width: 100%;
   width: 100px;

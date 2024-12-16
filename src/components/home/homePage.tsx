@@ -8,25 +8,27 @@ import GameCard from "@/components/game/gameCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Game } from "@/types/game.types";
-import { getTopGames, getSearchGames } from "@/api/game";
-import * as _ from "lodash";
+import { getTopGames } from "@/api/game";
+import HomeSearchBar from "@/components/home/homeSearchBar";
 import * as styles from "./homePage.m.scss";
 
 export default function HomePage() {
   const [latestGames, setLatestGames] = useState<Game[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [searchedGames, setSearchedGames] = useState<Game[]>([]);
 
   useEffect(() => {
     const prom: Promise<Game[]> = getTopGames();
     prom
       .then((res) => {
         setLatestGames(res);
+        if (res.length > 0) {
+          setLoading(false);
+        }
       })
       .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => setLoading(false));
+        console.log(err);
+        console.error("Unable to Fetch!");
+      });
   }, []);
 
   const navigate = useNavigate();
@@ -39,39 +41,9 @@ export default function HomePage() {
     }
   };
 
-  const searchGame = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const text: string = event.target.value;
-    if (text !== "") {
-      const prom: Promise<Game[]> = getSearchGames(text);
-      prom
-        .then((res) => {
-          setSearchedGames(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      setSearchedGames([]);
-    }
-  };
-
-  const chooseGame = (gameName: string) => {
-    alert(`Got product ${gameName}`);
-  };
-
   return (
     <section className={styles.section}>
-      <div className={styles.searchHolder}>
-        <input placeholder="Search" className={styles.search} onChange={_.debounce(searchGame, 300)} />
-        {searchedGames.length > 0
-          ? searchedGames.map((game) => (
-              <button className={styles.resultContainer} type="submit" key={game.id} onClick={() => chooseGame(game.name)}>
-                {" "}
-                {game.name}{" "}
-              </button>
-            ))
-          : null}
-      </div>
+      <HomeSearchBar />
       <NamedSectionForElements name="Categories">
         <CategoryButton key="pc_button" src={PC_LOGO} category="PC" onClick={() => handleClick(PC)} />
         <CategoryButton key="xbox_button" src={XBOX_LOGO} category="XBox One" onClick={() => handleClick(XBOX)} />
