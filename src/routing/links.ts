@@ -7,3 +7,6 @@ export const PLAYSTATION: string = "playstation";
 export const ABOUT_PAGE: string = "/about";
 export const SIGNUP_PAGE: string = "/signup";
 export const SIGNIN_PAGE: string = "/signin";
+export const USER_PAGE: string = "/user";
+export const SHOPPING_CART_PAGE: string = "/shopping-cart";
+export const SING_OUT: string = "/sign-out";
