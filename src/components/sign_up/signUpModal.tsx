@@ -1,22 +1,25 @@
 import InputText from "@/elements/controls/inputText";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Modal from "@/elements/modal/modal";
-import CLOSE_ICON from "@/assets/images/icons/close.svg";
 import { isValidEmail, isValidPassword } from "@/helpers/validation";
-import { signInUser } from "@/api/auth";
-import * as styles from "./signIn.m.scss";
+import { signUpUser } from "@/api/auth";
+import * as styles from "./signUp.m.scss";
 
-export default function SignIn({
+export default function SignUpModal({
   authenticatedUser,
   setAuthenticatedUser,
+  isOpened,
+  setIsOpened,
 }: {
   authenticatedUser: string;
   setAuthenticatedUser: (value: string) => void;
+  isOpened: boolean;
+  setIsOpened: (value: boolean) => void;
 }) {
-  const [isOpened, setIsOpened] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,14 +28,16 @@ export default function SignIn({
   };
 
   const handleUnsuccessfulClose = () => {
-    window.location.replace("/");
     setIsOpened(false);
   };
 
   function generateValidationMessage() {
     let validationMassage = "";
     validationMassage += !isValidEmail(formData.email) ? "Invalid email\n" : "";
-    validationMassage += !isValidPassword(formData.password) ? "Invalid password\n" : "";
+    validationMassage += !isValidPassword(formData.password)
+      ? "Your password must have at least 8 characters; must contain at least: \n - 1 uppercase character \n - 1 lowercase character; \n - 1 number. \n"
+      : "";
+    validationMassage += formData.password !== formData.confirmPassword ? "Passwords do not match.\n" : "";
     return validationMassage;
   }
 
@@ -45,13 +50,14 @@ export default function SignIn({
       return;
     }
 
-    const resultPromise = signInUser(formData.email, formData.password);
+    console.error(formData);
+    const resultPromise = signUpUser(formData.email, formData.password);
     resultPromise
       .then((result) => {
         if (result) {
-          setAuthenticatedUser(formData.email);
-          console.log("Signed in successfully!");
+          console.log("Sign-Up is successful!");
           setIsOpened(false);
+          setAuthenticatedUser(formData.email);
         } else {
           alert("Invalid credentials!");
         }
@@ -60,16 +66,12 @@ export default function SignIn({
         console.error(error);
       });
   };
-
   return (
     (authenticatedUser === "" && (
       <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.wrapper}>
-            <h1 className={styles.h1}>Authorization</h1>
-            <button type="button" className={styles.closeButton} onClick={handleUnsuccessfulClose}>
-              <img src={CLOSE_ICON} alt="Close" />
-            </button>
+            <h1 className={styles.h1}>Registration</h1>
           </div>
           <div className={styles.wrapper}>
             <InputText
@@ -78,21 +80,34 @@ export default function SignIn({
               value={formData.email}
               handleChange={handleChange}
               placeholder="Username"
-              labelText="Email"
+              labelText="Login"
             />
           </div>
+
           <div className={styles.wrapper}>
             <InputText
               id="password"
               name="password"
               value={formData.password}
               handleChange={handleChange}
-              placeholder="Password"
               labelText="Password"
+              placeholder="Password"
             />
           </div>
+
+          <div className={styles.wrapper}>
+            <InputText
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              handleChange={handleChange}
+              labelText="Confirm Password"
+              placeholder="Confirm Password"
+            />
+          </div>
+
           <button className={styles.submitButton} type="submit">
-            Sign In
+            Submit
           </button>
         </form>
       </Modal>

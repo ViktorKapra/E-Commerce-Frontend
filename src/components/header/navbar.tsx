@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { ABOUT_PAGE, HOME_PAGE, SIGNIN_PAGE, SIGNUP_PAGE, SHOPPING_CART_PAGE, USER_PAGE, SING_OUT } from "@/routing/links";
+import { ABOUT_PAGE, HOME_PAGE, SHOPPING_CART_PAGE, USER_PAGE, SING_OUT } from "@/routing/links";
 import clsx from "clsx";
 import LOG_OUT_ICON from "@/assets/images/icons/logout.png";
 import SHOPPING_CART_ICON from "@/assets/images/icons/shoppingCart.png";
@@ -10,9 +10,17 @@ import * as styles from "./navbar.m.scss";
 export default function Navbar({
   authenticatedUser,
   setAuthenticatedUser,
+  isSignInModalOpened,
+  setIsSignInModalOpened,
+  isSignUpModalOpened,
+  setIsSignUpModalOpened,
 }: {
   authenticatedUser: string;
   setAuthenticatedUser: (value: string) => void;
+  isSignInModalOpened: boolean;
+  setIsSignInModalOpened: (value: boolean) => void;
+  isSignUpModalOpened: boolean;
+  setIsSignUpModalOpened: (value: boolean) => void;
 }) {
   return (
     <header className={styles.navBar}>
@@ -50,12 +58,12 @@ export default function Navbar({
         )}
         {authenticatedUser === "" && (
           <>
-            <NavLink to={SIGNIN_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
+            <button type="button" className={styles.navButton} onClick={() => setIsSignInModalOpened(!isSignInModalOpened)}>
               Sign In
-            </NavLink>
-            <NavLink to={SIGNUP_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
-              Sign Up
-            </NavLink>
+            </button>
+            <button type="button" className={styles.navButton} onClick={() => setIsSignUpModalOpened(!isSignUpModalOpened)}>
+              Sign up
+            </button>
           </>
         )}
       </nav>
