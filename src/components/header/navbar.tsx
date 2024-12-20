@@ -10,17 +10,13 @@ import * as styles from "./navbar.m.scss";
 export default function Navbar({
   authenticatedUser,
   setAuthenticatedUser,
-  isSignInModalOpened,
-  setIsSignInModalOpened,
-  isSignUpModalOpened,
-  setIsSignUpModalOpened,
+  openSignInModal,
+  openSignUpModal,
 }: {
   authenticatedUser: string;
   setAuthenticatedUser: (value: string) => void;
-  isSignInModalOpened: boolean;
-  setIsSignInModalOpened: (value: boolean) => void;
-  isSignUpModalOpened: boolean;
-  setIsSignUpModalOpened: (value: boolean) => void;
+  openSignInModal: () => void;
+  openSignUpModal: () => void;
 }) {
   return (
     <header className={styles.navBar}>
@@ -58,10 +54,10 @@ export default function Navbar({
         )}
         {authenticatedUser === "" && (
           <>
-            <button type="button" className={styles.navButton} onClick={() => setIsSignInModalOpened(!isSignInModalOpened)}>
+            <button type="button" className={styles.navButton} onClick={() => openSignInModal()}>
               Sign In
             </button>
-            <button type="button" className={styles.navButton} onClick={() => setIsSignUpModalOpened(!isSignUpModalOpened)}>
+            <button type="button" className={styles.navButton} onClick={() => openSignUpModal()}>
               Sign up
             </button>
           </>

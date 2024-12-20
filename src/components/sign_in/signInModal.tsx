@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import Modal from "@/elements/modal/modal";
 import { isValidEmail, isValidPassword } from "@/helpers/validation";
 import { signInUser } from "@/api/auth";
+import { useNavigate } from "react-router";
 import * as styles from "./signInModal.m.scss";
 
 export default function SignInModal({
@@ -16,6 +17,7 @@ export default function SignInModal({
   isOpened: boolean;
   setIsOpened: (value: boolean) => void;
 }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ export default function SignInModal({
 
   const handleUnsuccessfulClose = () => {
     setIsOpened(false);
+    navigate("/");
   };
 
   function generateValidationMessage() {

@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
+import { Outlet } from "react-router";
 
-export default function PrivateComponent({
+export default function RouteGuard({
   authenticatedUser,
-  children,
   isOpenSignInModal,
   setSignInModal,
 }: {
   authenticatedUser: string;
-  children: React.ReactNode;
   isOpenSignInModal: boolean;
   setSignInModal: (value: boolean) => void;
 }) {
@@ -24,5 +23,5 @@ export default function PrivateComponent({
     };
   }, [authenticatedUser]);
 
-  return children;
+  return <Outlet />;
 }

@@ -24,15 +24,16 @@ export default function MainLayout({
   isSignUpModalOpened: boolean;
   setIsSignUpModalOpened: (value: boolean) => void;
 }) {
+  const openSignInModal = () => setIsSignInModalOpened(true);
+  const openSignUpModal = () => setIsSignUpModalOpened(true);
+
   return (
     <ErrorBoundary fallbackRender={FallbackRender}>
       <Header
         authenticatedUser={authenticatedUser}
         setAuthenticatedUser={setAuthenticatedUser}
-        isSignInModalOpened={isSignInModalOpened}
-        setIsSignInModalOpened={setIsSignInModalOpened}
-        isSignUpModalOpened={isSignUpModalOpened}
-        setIsSignUpModalOpened={setIsSignUpModalOpened}
+        openSignInModal={openSignInModal}
+        openSignUpModal={openSignUpModal}
       />
       <main className={styles.container}>{children}</main>
 

@@ -4,7 +4,6 @@ export async function signInUser(email: string, password: string): Promise<boole
   const url = apiEndpoints.signIn; // "https://localhost:7240/api/auth/signIn";
   const response = await fetch(url, {
     method: "POST",
-    mode: "cors",
     headers: new Headers({ "Content-type": "application/json" }),
     body: JSON.stringify({ email, password }),
   });
@@ -23,7 +22,6 @@ export async function signUpUser(email: string, password: string): Promise<boole
 
   const response = await fetch(url, {
     method: "POST",
-    mode: "cors",
     headers: new Headers({ "Content-type": "application/json" }),
     body: JSON.stringify({ email, password }),
   });

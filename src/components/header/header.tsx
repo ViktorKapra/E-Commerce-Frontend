@@ -4,17 +4,13 @@ import * as styles from "./header.m.scss";
 export default function Header({
   authenticatedUser,
   setAuthenticatedUser,
-  isSignInModalOpened,
-  setIsSignInModalOpened,
-  isSignUpModalOpened,
-  setIsSignUpModalOpened,
+  openSignInModal,
+  openSignUpModal,
 }: {
   authenticatedUser: string;
   setAuthenticatedUser: (value: string) => void;
-  isSignInModalOpened: boolean;
-  setIsSignInModalOpened: (value: boolean) => void;
-  isSignUpModalOpened: boolean;
-  setIsSignUpModalOpened: (value: boolean) => void;
+  openSignInModal: () => void;
+  openSignUpModal: () => void;
 }) {
   return (
     <header className={styles.header}>
@@ -22,10 +18,8 @@ export default function Header({
       <Navbar
         authenticatedUser={authenticatedUser}
         setAuthenticatedUser={setAuthenticatedUser}
-        isSignInModalOpened={isSignInModalOpened}
-        setIsSignInModalOpened={setIsSignInModalOpened}
-        isSignUpModalOpened={isSignUpModalOpened}
-        setIsSignUpModalOpened={setIsSignUpModalOpened}
+        openSignInModal={openSignInModal}
+        openSignUpModal={openSignUpModal}
       />
     </header>
   );
