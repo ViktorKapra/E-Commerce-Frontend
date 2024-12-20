@@ -8,35 +8,70 @@ import { useState } from "react";
 import SignIn from "@/components/sign_in/signIn";
 import SignUp from "@/components/sign_up/signUp";
 import UserPage from "@/components/user/userPage";
+import NONE_AUTHENTICATED_USER from "@/helpers/constants";
 
 export default function Routing() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authenticatedUser, setAuthenticatedUser] = useState("");
   return (
     <BrowserRouter>
-      <MainLayout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}>
+      <MainLayout authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}>
         <Routes>
           <Route index path={HOME_PAGE} element={<HomePage />} />
-          {!isAuthenticated && (
-            <>
-              <Route path={SIGNIN_PAGE} element={<SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} />} />
-              <Route path={SIGNUP_PAGE} element={<SignUp isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} />} />
-            </>
+          {authenticatedUser === NONE_AUTHENTICATED_USER && (
+            <Route
+              path={SIGNIN_PAGE}
+              element={<SignIn authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />}
+            />
           )}
           <Route
+            path={SIGNUP_PAGE}
+            element={
+              authenticatedUser === NONE_AUTHENTICATED_USER ? (
+                <SignUp authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
+              ) : (
+                <Navigate to={USER_PAGE} replace />
+              )
+            }
+          />
+          <Route
             path={USER_PAGE}
-            element={!isAuthenticated ? <SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} /> : <UserPage />}
+            element={
+              authenticatedUser === NONE_AUTHENTICATED_USER ? (
+                <SignIn authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
+              ) : (
+                <UserPage />
+              )
+            }
           />
           <Route
             path={ABOUT_PAGE}
-            element={!isAuthenticated ? <SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} /> : <AboutPage />}
+            element={
+              authenticatedUser === NONE_AUTHENTICATED_USER ? (
+                <SignIn authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
+              ) : (
+                <AboutPage />
+              )
+            }
           />
           <Route
             path={PRODUCT_PAGE}
-            element={!isAuthenticated ? <SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} /> : <ProductPage />}
+            element={
+              authenticatedUser === NONE_AUTHENTICATED_USER ? (
+                <SignIn authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
+              ) : (
+                <ProductPage />
+              )
+            }
           />
           <Route
             path={PRODUCT_PAGE_CATEGORY}
-            element={!isAuthenticated ? <SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} /> : <ProductPage />}
+            element={
+              authenticatedUser === NONE_AUTHENTICATED_USER ? (
+                <SignIn authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
+              ) : (
+                <ProductPage />
+              )
+            }
           />
           <Route path="*" element={<Navigate to={HOME_PAGE} replace />} />
         </Routes>

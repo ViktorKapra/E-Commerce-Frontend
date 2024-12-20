@@ -51,12 +51,20 @@ const mockData = {
 export default webpackMockServer.add((app) => {
   app.get(apiEndpoints.testMock, (_req, res) => res.json(mockData));
   app.get(apiEndpoints.topProducts, (_req, res) => res.json(mockDataGames));
-  app.get("/api/search/:text", (req, res) => {
+  app.get(`${apiEndpoints.searchProducts}:text`, (req, res) => {
     const { text } = req.params;
     if (!text.includes("/")) {
       const matchedGames = mockDataGames.filter((game) => game.name.toLowerCase().includes(text.toLowerCase()));
       return res.json(matchedGames.slice(0, 5));
     }
     return res.status(400).send("Invalid search text");
+  });
+  app.post(apiEndpoints.signIn, (_req, res) => {
+    console.log(_req.body);
+    return res.status(204).json();
+  });
+  app.post(apiEndpoints.signUp, (_req, res) => {
+    console.log(_req.body);
+    return res.status(204).json();
   });
 });

@@ -2,16 +2,16 @@ import Navbar from "./navbar";
 import * as styles from "./header.m.scss";
 
 export default function Header({
-  isAuthenticated,
-  setIsAuthenticated,
+  authenticatedUser,
+  setAuthenticatedUser,
 }: {
-  isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  authenticatedUser: string;
+  setAuthenticatedUser: (value: string) => void;
 }) {
   return (
     <header className={styles.header}>
       <h1 className={styles.h1}>Game Market</h1>
-      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <Navbar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
     </header>
   );
 }

@@ -8,11 +8,11 @@ import ProductDropDownMenu from "./productDropDownMenu";
 import * as styles from "./navbar.m.scss";
 
 export default function Navbar({
-  isAuthenticated,
-  setIsAuthenticated,
+  authenticatedUser,
+  setAuthenticatedUser,
 }: {
-  isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  authenticatedUser: string;
+  setAuthenticatedUser: (value: string) => void;
 }) {
   return (
     <header className={styles.navBar}>
@@ -24,11 +24,11 @@ export default function Navbar({
         <NavLink to={ABOUT_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
           About
         </NavLink>
-        {isAuthenticated && (
+        {authenticatedUser !== "" && (
           <>
             <NavLink to={USER_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
               <img src={USER_ICON} alt="USER_ICON" />
-              <p>UserName </p>
+              <p> {authenticatedUser} </p>
             </NavLink>
             <NavLink
               to={SHOPPING_CART_PAGE}
@@ -41,14 +41,14 @@ export default function Navbar({
             <NavLink
               to={SING_OUT}
               className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })}
-              onClick={() => setIsAuthenticated(false)}
+              onClick={() => setAuthenticatedUser("")}
               end
             >
               <img src={LOG_OUT_ICON} alt="Log out" />
             </NavLink>
           </>
         )}
-        {!isAuthenticated && (
+        {authenticatedUser === "" && (
           <>
             <NavLink to={SIGNIN_PAGE} className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })} end>
               Sign In

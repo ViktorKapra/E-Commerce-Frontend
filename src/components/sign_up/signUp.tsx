@@ -1,11 +1,18 @@
 import InputText from "@/elements/controls/inputText";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Modal from "@/elements/modal/modal";
-import { IsValidEmail, IsValidPassword } from "@/helpers/validation";
+import { isValidEmail, isValidPassword } from "@/helpers/validation";
 import CLOSE_ICON from "@/assets/images/icons/close.svg";
+import { signUpUser } from "@/api/auth";
 import * as styles from "./signUp.m.scss";
 
-export default function SignUp({ isSignedIn, setIsSignIn }: { isSignedIn: boolean; setIsSignIn: (value: boolean) => void }) {
+export default function SignUp({
+  authenticatedUser,
+  setAuthenticatedUser,
+}: {
+  authenticatedUser: string;
+  setAuthenticatedUser: (value: string) => void;
+}) {
   const [isOpened, setIsOpened] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -23,37 +30,43 @@ export default function SignUp({ isSignedIn, setIsSignIn }: { isSignedIn: boolea
     setIsOpened(false);
   };
 
+  function generateValidationMessage() {
+    let validationMassage = "";
+    validationMassage += !isValidEmail(formData.email) ? "Invalid email\n" : "";
+    validationMassage += !isValidPassword(formData.password)
+      ? "Your password must have at least 8 characters; must contain at least: \n - 1 uppercase character \n - 1 lowercase character; \n - 1 number. \n"
+      : "";
+    validationMassage += formData.password !== formData.confirmPassword ? "Passwords do not match.\n" : "";
+    return validationMassage;
+  }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!IsValidEmail(formData.email) || !IsValidPassword(formData.password) || formData.password !== formData.confirmPassword) {
-      alert("Invalid credentials!");
+    const validationMassage = generateValidationMessage();
+    if (validationMassage !== "") {
+      alert(validationMassage);
       return;
     }
 
     console.error(formData);
-    setIsSignIn(true);
-    setIsOpened(false);
-    /* const resultPromise = signInUser(formData.email, formData.password);
+    const resultPromise = signUpUser(formData.email, formData.password);
     resultPromise
       .then((result) => {
         if (result) {
-          setIsSignIn(true);
-          console.log("Signed in successfully!");
+          console.log("Sign-Up is successful!");
           setIsOpened(false);
+          setAuthenticatedUser(formData.email);
         } else {
           alert("Invalid credentials!");
-          //handleUnsuccessfulClose();
         }
       })
       .catch((error: Error) => {
         console.error(error);
-        //handleUnsuccessfulClose();
-      });*/
+      });
   };
-
   return (
-    (!isSignedIn && (
+    (authenticatedUser === "" && (
       <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.wrapper}>

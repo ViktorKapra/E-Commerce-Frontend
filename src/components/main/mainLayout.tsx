@@ -7,19 +7,16 @@ import * as styles from "./mainLayout.m.scss";
 
 export default function MainLayout({
   children,
-  isAuthenticated,
-  setIsAuthenticated,
+  authenticatedUser,
+  setAuthenticatedUser,
 }: {
   children: ReactNode;
-  isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  authenticatedUser: string;
+  setAuthenticatedUser: (value: string) => void;
 }) {
   return (
     <ErrorBoundary fallbackRender={FallbackRender}>
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-      {/* <Modal open={!isSignInOpened} handleClose={setIsSignInOpened}>
-        <SignIn isSignedIn={isAuthenticated} setIsSignIn={setIsAuthenticated} />
-      </Modal>*/}
+      <Header authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser} />
       <main className={styles.container}>{children}</main>
       <Footer />
     </ErrorBoundary>

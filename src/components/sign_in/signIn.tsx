@@ -2,10 +2,17 @@ import InputText from "@/elements/controls/inputText";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Modal from "@/elements/modal/modal";
 import CLOSE_ICON from "@/assets/images/icons/close.svg";
-import { IsValidEmail, IsValidPassword } from "@/helpers/validation";
+import { isValidEmail, isValidPassword } from "@/helpers/validation";
+import { signInUser } from "@/api/auth";
 import * as styles from "./signIn.m.scss";
 
-export default function SignIn({ isSignedIn, setIsSignIn }: { isSignedIn: boolean; setIsSignIn: (value: boolean) => void }) {
+export default function SignIn({
+  authenticatedUser,
+  setAuthenticatedUser,
+}: {
+  authenticatedUser: string;
+  setAuthenticatedUser: (value: string) => void;
+}) {
   const [isOpened, setIsOpened] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -22,37 +29,40 @@ export default function SignIn({ isSignedIn, setIsSignIn }: { isSignedIn: boolea
     setIsOpened(false);
   };
 
+  function generateValidationMessage() {
+    let validationMassage = "";
+    validationMassage += !isValidEmail(formData.email) ? "Invalid email\n" : "";
+    validationMassage += !isValidPassword(formData.password) ? "Invalid password\n" : "";
+    return validationMassage;
+  }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!IsValidEmail(formData.email) || !IsValidPassword(formData.password)) {
-      alert("Invalid credentials!");
+    const validationMassage = generateValidationMessage();
+    if (validationMassage !== "") {
+      alert(validationMassage);
       return;
     }
 
-    console.error(formData);
-    setIsSignIn(true);
-    setIsOpened(false);
-    /* const resultPromise = signInUser(formData.email, formData.password);
+    const resultPromise = signInUser(formData.email, formData.password);
     resultPromise
       .then((result) => {
         if (result) {
-          setIsSignIn(true);
+          setAuthenticatedUser(formData.email);
           console.log("Signed in successfully!");
           setIsOpened(false);
         } else {
           alert("Invalid credentials!");
-          //handleUnsuccessfulClose();
         }
       })
       .catch((error: Error) => {
         console.error(error);
-        //handleUnsuccessfulClose();
-      });*/
+      });
   };
 
   return (
-    (!isSignedIn && (
+    (authenticatedUser === "" && (
       <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.wrapper}>
