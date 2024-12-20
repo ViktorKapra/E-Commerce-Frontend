@@ -1,0 +1,71 @@
+.form {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 25px;
+}
+
+.h1 {
+  color: $primaryWhite;
+  margin: 0;
+}
+
+.submitButton {
+  color: $primaryWhite;
+  background-color: $secondaryPurple;
+  font-size: 25px;
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: $primaryPurpleLighten;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  > input {
+    background-color: transparent;
+    color: $primaryWhite;
+    border: $primaryWhite 1px solid;
+    height: 50px;
+    width: 60%;
+  }
+
+  > label {
+    font-size: 25px;
+    color: $primaryWhite;
+  }
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  height: 70px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  > img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.closeButton:hover {
+  border: 1px solid $primaryPurple;
+}
