@@ -7,49 +7,13 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import * as styles from "./mainLayout.m.scss";
 
-export default function MainLayout({
-  children,
-  authenticatedUser,
-  setAuthenticatedUser,
-  isSignInModalOpened,
-  setIsSignInModalOpened,
-  isSignUpModalOpened,
-  setIsSignUpModalOpened,
-}: {
-  children: ReactNode;
-  authenticatedUser: string;
-  setAuthenticatedUser: (value: string) => void;
-  isSignInModalOpened: boolean;
-  setIsSignInModalOpened: (value: boolean) => void;
-  isSignUpModalOpened: boolean;
-  setIsSignUpModalOpened: (value: boolean) => void;
-}) {
-  const openSignInModal = () => setIsSignInModalOpened(true);
-  const openSignUpModal = () => setIsSignUpModalOpened(true);
-
+export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundary fallbackRender={FallbackRender}>
-      <Header
-        authenticatedUser={authenticatedUser}
-        setAuthenticatedUser={setAuthenticatedUser}
-        openSignInModal={openSignInModal}
-        openSignUpModal={openSignUpModal}
-      />
+      <Header />
       <main className={styles.container}>{children}</main>
-
-      <SignInModal
-        authenticatedUser={authenticatedUser}
-        setAuthenticatedUser={setAuthenticatedUser}
-        isOpened={isSignInModalOpened}
-        setIsOpened={setIsSignInModalOpened}
-      />
-      <SignUpModal
-        authenticatedUser={authenticatedUser}
-        setAuthenticatedUser={setAuthenticatedUser}
-        isOpened={isSignUpModalOpened}
-        setIsOpened={setIsSignUpModalOpened}
-      />
-
+      <SignInModal />
+      <SignUpModal />
       <Footer />
     </ErrorBoundary>
   );

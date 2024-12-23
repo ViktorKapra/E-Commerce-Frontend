@@ -1,22 +1,20 @@
 import InputText from "@/elements/controls/inputText";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import Modal from "@/elements/modal/modal";
 import { isValidEmail, isValidPassword } from "@/helpers/validation";
 import { signInUser } from "@/api/auth";
 import { useNavigate } from "react-router";
+import { AuthContext } from "@/helpers/context/authContext";
 import * as styles from "./signInModal.m.scss";
 
-export default function SignInModal({
-  authenticatedUser,
-  setAuthenticatedUser,
-  isOpened,
-  setIsOpened,
-}: {
-  authenticatedUser: string;
-  setAuthenticatedUser: (value: string) => void;
-  isOpened: boolean;
-  setIsOpened: (value: boolean) => void;
-}) {
+export default function SignInModal() {
+  const {
+    authenticatedUser,
+    setAuthenticatedUser,
+    isSignInModalOpened: isOpened,
+    setIsSignInModalOpened: setIsOpened,
+  } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",

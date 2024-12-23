@@ -1,21 +1,19 @@
 import InputText from "@/elements/controls/inputText";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import Modal from "@/elements/modal/modal";
 import { isValidEmail, isValidPassword } from "@/helpers/validation";
 import { signUpUser } from "@/api/auth";
+import { AuthContext } from "@/helpers/context/authContext";
 import * as styles from "./signUp.m.scss";
 
-export default function SignUpModal({
-  authenticatedUser,
-  setAuthenticatedUser,
-  isOpened,
-  setIsOpened,
-}: {
-  authenticatedUser: string;
-  setAuthenticatedUser: (value: string) => void;
-  isOpened: boolean;
-  setIsOpened: (value: boolean) => void;
-}) {
+export default function SignUpModal() {
+  const {
+    authenticatedUser,
+    setAuthenticatedUser,
+    isSignUpModalOpened: isOpened,
+    setIsSignUpModalOpened: setIsOpened,
+  } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
