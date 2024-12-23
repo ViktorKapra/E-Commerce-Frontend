@@ -1,0 +1,30 @@
+.wrapper {
+  flex-direction: column;
+  width: 350px;
+  min-width: 100px;
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  background-color: transparent;
+  color: $primaryWhite;
+  border: $primaryWhite 1px solid;
+  min-width: 40px;
+}
+
+.label {
+  font-size: 20px;
+  color: $primaryWhite;
+}
+
+.invalidInput {
+  background: inherit;
+  border: $primaryRed 1px solid;
+  outline: $primaryRed 1px solid;
+}
+
+.validationMessage {
+  color: $primaryRed;
+  font-size: 15px;
+}

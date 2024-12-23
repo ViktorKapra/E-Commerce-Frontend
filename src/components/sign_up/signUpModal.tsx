@@ -1,9 +1,13 @@
-import InputText from "@/elements/controls/inputText";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import FormInputText from "@/elements/controls/formInputText";
+import { useContext } from "react";
 import Modal from "@/elements/modal/modal";
-import { isValidEmail, isValidPassword } from "@/helpers/validation";
 import { signUpUser } from "@/api/auth";
 import { AuthContext } from "@/helpers/context/authContext";
+import { Field, FormProvider, RegisterOptions, useForm } from "react-hook-form";
+import NONE_AUTHENTICATED_USER from "@/helpers/constants";
+import { emailValidation, passwordValidation } from "@/helpers/formValidation";
+import { useNavigate } from "react-router";
+import { USER_PAGE } from "@/routing/links";
 import * as styles from "./signUp.m.scss";
 
 export default function SignUpModal() {
@@ -14,48 +18,35 @@ export default function SignUpModal() {
     setIsSignUpModalOpened: setIsOpened,
   } = useContext(AuthContext);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const navigate = useNavigate();
+  const methods = useForm();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const [key, value] = [e.target.name, e.target.value];
-    setFormData((prev) => ({ ...prev, [key]: value }));
+  const password: Field = methods.watch("password");
+
+  const confirmPasswordValidation: RegisterOptions = {
+    required: "Please confirm your password",
+    validate: (value: Field) => {
+      return value === password || "Passwords do not match";
+    },
   };
 
   const handleUnsuccessfulClose = () => {
+    methods.reset();
     setIsOpened(false);
   };
 
-  function generateValidationMessage() {
-    let validationMassage = "";
-    validationMassage += !isValidEmail(formData.email) ? "Invalid email\n" : "";
-    validationMassage += !isValidPassword(formData.password)
-      ? "Your password must have at least 8 characters; must contain at least: \n - 1 uppercase character \n - 1 lowercase character; \n - 1 number. \n"
-      : "";
-    validationMassage += formData.password !== formData.confirmPassword ? "Passwords do not match.\n" : "";
-    return validationMassage;
-  }
+  const handleSubmit = methods.handleSubmit((data) => {
+    console.log(data);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const validationMassage = generateValidationMessage();
-    if (validationMassage !== "") {
-      alert(validationMassage);
-      return;
-    }
-
-    console.error(formData);
-    const resultPromise = signUpUser(formData.email, formData.password);
+    console.error(data);
+    const resultPromise = signUpUser(data.email, data.password);
     resultPromise
       .then((result) => {
         if (result) {
           console.log("Sign-Up is successful!");
           setIsOpened(false);
-          setAuthenticatedUser(formData.email);
+          setAuthenticatedUser(data.email);
+          navigate(USER_PAGE);
         } else {
           alert("Invalid credentials!");
         }
@@ -63,53 +54,38 @@ export default function SignUpModal() {
       .catch((error: Error) => {
         console.error(error);
       });
-  };
+  });
+
   return (
-    (authenticatedUser === "" && (
-      <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <div className={styles.wrapper}>
-            <h1 className={styles.h1}>Registration</h1>
-          </div>
-          <div className={styles.wrapper}>
-            <InputText
-              id="email"
-              name="email"
-              value={formData.email}
-              handleChange={handleChange}
-              placeholder="Username"
-              labelText="Login"
-            />
-          </div>
+    authenticatedUser === NONE_AUTHENTICATED_USER && (
+      <FormProvider {...methods}>
+        <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.wrapper}>
+              <h1 className={styles.h1}>Registration</h1>
+            </div>
+            <div className={styles.wrapper}>
+              <FormInputText id="email" placeholder="Username" labelText="Login" validation={emailValidation} />
+            </div>
+            <div className={styles.wrapper}>
+              <FormInputText id="password" labelText="Password" placeholder="Password" validation={passwordValidation} />
+            </div>
 
-          <div className={styles.wrapper}>
-            <InputText
-              id="password"
-              name="password"
-              value={formData.password}
-              handleChange={handleChange}
-              labelText="Password"
-              placeholder="Password"
-            />
-          </div>
+            <div className={styles.wrapper}>
+              <FormInputText
+                id="confirmPassword"
+                labelText="Confirm Password"
+                placeholder="Confirm Password"
+                validation={confirmPasswordValidation}
+              />
+            </div>
 
-          <div className={styles.wrapper}>
-            <InputText
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              handleChange={handleChange}
-              labelText="Confirm Password"
-              placeholder="Confirm Password"
-            />
-          </div>
-
-          <button className={styles.submitButton} type="submit">
-            Submit
-          </button>
-        </form>
-      </Modal>
-    )) ||
-    null
+            <button className={styles.submitButton} type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          </form>
+        </Modal>
+      </FormProvider>
+    )
   );
 }
