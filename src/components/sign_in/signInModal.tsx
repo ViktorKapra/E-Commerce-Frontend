@@ -1,21 +1,18 @@
 import FormInputText from "@/elements/controls/formInputText";
-import { useContext } from "react";
 import Modal from "@/elements/modal/modal";
 import { signInUser } from "@/api/auth";
 import { useNavigate } from "react-router";
-import { AuthContext } from "@/helpers/context/authContext";
+import { useAuth } from "@/helpers/context/authContext";
+import { HOME_PAGE } from "@/routing/links";
 import { FormProvider, useForm } from "react-hook-form";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
 import { emailValidation, passwordValidation } from "@/helpers/formValidation";
+import { useSignIn } from "@/helpers/context/signInContext";
 import * as styles from "./signInModal.m.scss";
 
 export default function SignInModal() {
-  const {
-    authenticatedUser,
-    setAuthenticatedUser,
-    isSignInModalOpened: isOpened,
-    setIsSignInModalOpened: setIsOpened,
-  } = useContext(AuthContext);
+  const { authenticatedUser, setAuthenticatedUser } = useAuth();
+  const { isSignInModalInOpen: isOpened, setIsSignInModalOpen: setIsOpened } = useSignIn();
 
   const navigate = useNavigate();
 
@@ -24,7 +21,7 @@ export default function SignInModal() {
   const handleUnsuccessfulClose = () => {
     setIsOpened(false);
     methods.reset();
-    navigate("/");
+    navigate(HOME_PAGE);
   };
 
   const handleSubmit = methods.handleSubmit((data) => {
@@ -38,6 +35,7 @@ export default function SignInModal() {
           console.log("Sign-In is successful!");
           setIsOpened(false);
           setAuthenticatedUser(data.email);
+          methods.reset();
         } else {
           alert("Invalid credentials!");
         }
@@ -59,7 +57,7 @@ export default function SignInModal() {
               <FormInputText id="email" placeholder="Username" labelText="Login" validation={emailValidation} />
             </div>
             <div className={styles.wrapper}>
-              <FormInputText id="password" labelText="Password" placeholder="Password" validation={passwordValidation} />
+              <FormInputText id="password" type="password" labelText="Password" placeholder="Password" validation={passwordValidation} />
             </div>
             <button className={styles.submitButton} type="submit" onClick={handleSubmit}>
               Submit

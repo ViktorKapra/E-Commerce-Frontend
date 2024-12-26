@@ -4,43 +4,18 @@ import HomePage from "@/components/home/homePage";
 import AboutPage from "@/components/about/aboutPage";
 import ProductPage from "@/components/product/productPage";
 import { HOME_PAGE, ABOUT_PAGE, PRODUCT_PAGE, PRODUCT_PAGE_CATEGORY, USER_PAGE } from "@/routing/links";
-import { useMemo, useState } from "react";
 import UserPage from "@/components/user/userPage";
 import RouteGuard from "@/routing/routeGuard";
-import { AuthContext, AuthContextType } from "@/helpers/context/authContext";
+import { SignInContextProvider } from "@/helpers/context/signInContext";
 
 export default function Routing() {
-  const [authenticatedUser, setAuthenticatedUser] = useState("");
-  const [isSignInModalOpened, setIsSignInModalOpened] = useState(false);
-  const [isSignUpModalOpened, setIsSignUpModalOpened] = useState(false);
-
-  const authValue: AuthContextType = useMemo(
-    () => ({
-      authenticatedUser,
-      setAuthenticatedUser,
-      isSignInModalOpened,
-      setIsSignInModalOpened,
-      isSignUpModalOpened,
-      setIsSignUpModalOpened,
-    }),
-    [authenticatedUser, isSignInModalOpened, isSignUpModalOpened],
-  );
-
   return (
-    <AuthContext.Provider value={authValue}>
+    <SignInContextProvider>
       <BrowserRouter>
         <MainLayout>
           <Routes>
             <Route index path={HOME_PAGE} element={<HomePage />} />
-            <Route
-              element={
-                <RouteGuard
-                  authenticatedUser={authenticatedUser}
-                  isOpenSignInModal={isSignInModalOpened}
-                  setSignInModal={setIsSignInModalOpened}
-                />
-              }
-            >
+            <Route element={<RouteGuard />}>
               <Route path={USER_PAGE} element={<UserPage />} />
               <Route path={ABOUT_PAGE} element={<AboutPage />} />
               <Route path={PRODUCT_PAGE} element={<ProductPage />} />
@@ -50,6 +25,6 @@ export default function Routing() {
           </Routes>
         </MainLayout>
       </BrowserRouter>
-    </AuthContext.Provider>
+    </SignInContextProvider>
   );
 }

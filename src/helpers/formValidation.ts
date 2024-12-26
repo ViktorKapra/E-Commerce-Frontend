@@ -17,7 +17,7 @@ export const passwordValidation: RegisterOptions = {
     message: "Required",
   },
   pattern: {
-    value: /^(?=.*\d)(?=.*[a-z])(?=.*\W)(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
     message: "Min 8 characters, at least one uppercase letter, one lowercase letter and one number",
   },
 };

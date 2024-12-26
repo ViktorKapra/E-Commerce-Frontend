@@ -2,6 +2,7 @@ import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
 import { Component, ErrorInfo, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import { AuthContextProvider } from "@/helpers/context/authContext";
 import Routing from "./routing/routing";
 import apiEndpoints from "./api.endpoints";
 
@@ -15,7 +16,6 @@ async function testFetch(): Promise<void> {
 
 class AppContainer extends Component<Props, State> {
   // ["constructor"]: typeof AppContainer;
-
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -37,7 +37,9 @@ class AppContainer extends Component<Props, State> {
   render() {
     return (
       <StrictMode>
-        <Routing />
+        <AuthContextProvider>
+          <Routing />
+        </AuthContextProvider>
       </StrictMode>
     );
   }

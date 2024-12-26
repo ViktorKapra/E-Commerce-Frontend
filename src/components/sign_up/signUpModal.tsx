@@ -1,22 +1,18 @@
 import FormInputText from "@/elements/controls/formInputText";
-import { useContext } from "react";
 import Modal from "@/elements/modal/modal";
 import { signUpUser } from "@/api/auth";
-import { AuthContext } from "@/helpers/context/authContext";
+import { useAuth } from "@/helpers/context/authContext";
 import { Field, FormProvider, RegisterOptions, useForm } from "react-hook-form";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
 import { emailValidation, passwordValidation } from "@/helpers/formValidation";
 import { useNavigate } from "react-router";
 import { USER_PAGE } from "@/routing/links";
+import { useSignUp } from "@/helpers/context/signUpContext";
 import * as styles from "./signUp.m.scss";
 
 export default function SignUpModal() {
-  const {
-    authenticatedUser,
-    setAuthenticatedUser,
-    isSignUpModalOpened: isOpened,
-    setIsSignUpModalOpened: setIsOpened,
-  } = useContext(AuthContext);
+  const { authenticatedUser, setAuthenticatedUser } = useAuth();
+  const { isSignUpModalInOpen: isOpened, setIsSignUpModalOpen: setIsOpened } = useSignUp();
 
   const navigate = useNavigate();
   const methods = useForm();
@@ -46,6 +42,7 @@ export default function SignUpModal() {
           console.log("Sign-Up is successful!");
           setIsOpened(false);
           setAuthenticatedUser(data.email);
+          methods.reset();
           navigate(USER_PAGE);
         } else {
           alert("Invalid credentials!");
@@ -68,12 +65,13 @@ export default function SignUpModal() {
               <FormInputText id="email" placeholder="Username" labelText="Login" validation={emailValidation} />
             </div>
             <div className={styles.wrapper}>
-              <FormInputText id="password" labelText="Password" placeholder="Password" validation={passwordValidation} />
+              <FormInputText id="password" type="password" labelText="Password" placeholder="Password" validation={passwordValidation} />
             </div>
 
             <div className={styles.wrapper}>
               <FormInputText
                 id="confirmPassword"
+                type="password"
                 labelText="Confirm Password"
                 placeholder="Confirm Password"
                 validation={confirmPasswordValidation}

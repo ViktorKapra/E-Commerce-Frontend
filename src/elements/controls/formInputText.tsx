@@ -9,11 +9,13 @@ export default function FormInputText({
   labelText,
   placeholder = "",
   validation,
+  type = "text",
 }: {
   id: string;
   labelText: string;
   placeholder: string;
   validation: RegisterOptions<FieldValues, string> | undefined;
+  type?: string;
 }) {
   const {
     register,
@@ -32,7 +34,7 @@ export default function FormInputText({
         <input
           className={clsx(styles.input, { [styles.invalidInput]: isInvalid })}
           id={id}
-          type="text"
+          type={type}
           placeholder={placeholder}
           {...register(id, validation)}
         />

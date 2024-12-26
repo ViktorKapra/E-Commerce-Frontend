@@ -4,20 +4,23 @@ import clsx from "clsx";
 import LOG_OUT_ICON from "@/assets/images/icons/logout.png";
 import SHOPPING_CART_ICON from "@/assets/images/icons/shoppingCart.png";
 import USER_ICON from "@/assets/images/icons/userIcon.png";
-import { AuthContext } from "@/helpers/context/authContext";
-import { useContext } from "react";
+import { useAuth } from "@/helpers/context/authContext";
+import { useSignUp } from "@/helpers/context/signUpContext";
+import { useSignIn } from "@/helpers/context/signInContext";
 import ProductDropDownMenu from "./productDropDownMenu";
 import * as styles from "./navbar.m.scss";
 
 export default function Navbar() {
-  const { authenticatedUser, setAuthenticatedUser, setIsSignInModalOpened, setIsSignUpModalOpened } = useContext(AuthContext);
+  const { authenticatedUser, setAuthenticatedUser } = useAuth();
+  const { setIsSignInModalOpen } = useSignIn();
+  const { setIsSignUpModalOpen } = useSignUp();
 
   const openSignInModal = () => {
-    setIsSignInModalOpened(true);
+    setIsSignInModalOpen(true);
   };
 
   const openSignUpModal = () => {
-    setIsSignUpModalOpened(true);
+    setIsSignUpModalOpen(true);
   };
   return (
     <header className={styles.navBar}>
