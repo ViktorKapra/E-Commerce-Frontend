@@ -1,24 +1,20 @@
 import { useEffect } from "react";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
 import { Outlet } from "react-router";
+import { useAuth } from "@/helpers/context/authContext";
+import { useSignIn } from "@/helpers/context/signInContext";
 
-export default function RouteGuard({
-  authenticatedUser,
-  isOpenSignInModal,
-  setSignInModal,
-}: {
-  authenticatedUser: string;
-  isOpenSignInModal: boolean;
-  setSignInModal: (value: boolean) => void;
-}) {
+export default function RouteGuard() {
+  const { authenticatedUser } = useAuth();
+  const { isSignInModalInOpen, setIsSignInModalOpen } = useSignIn();
   useEffect(() => {
     if (authenticatedUser === NONE_AUTHENTICATED_USER) {
-      setSignInModal(true);
+      setIsSignInModalOpen(true);
     }
 
     return () => {
-      if (authenticatedUser === NONE_AUTHENTICATED_USER && isOpenSignInModal) {
-        setSignInModal(false);
+      if (authenticatedUser === NONE_AUTHENTICATED_USER && isSignInModalInOpen) {
+        setIsSignInModalOpen(false);
       }
     };
   }, [authenticatedUser]);
