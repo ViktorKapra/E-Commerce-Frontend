@@ -4,15 +4,13 @@ import { signUpUser } from "@/api/auth";
 import { useAuth } from "@/helpers/context/authContext";
 import { Field, FormProvider, RegisterOptions, useForm } from "react-hook-form";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
-import { emailValidation, passwordValidation } from "@/helpers/formValidation";
+import { emailValidation, passwordValidation } from "@/helpers/utils";
 import { useNavigate } from "react-router";
 import { USER_PAGE } from "@/routing/links";
-import { useSignUp } from "@/helpers/context/signUpContext";
 import * as styles from "./signUp.m.scss";
 
-export default function SignUpModal() {
+export default function SignUpModal({ isOpened, setIsOpened }: { isOpened: boolean; setIsOpened: (value: boolean) => void }) {
   const { authenticatedUser, setAuthenticatedUser } = useAuth();
-  const { isSignUpModalInOpen: isOpened, setIsSignUpModalOpen: setIsOpened } = useSignUp();
 
   const navigate = useNavigate();
   const methods = useForm();
@@ -27,19 +25,15 @@ export default function SignUpModal() {
   };
 
   const handleUnsuccessfulClose = () => {
-    methods.reset();
     setIsOpened(false);
+    methods.reset();
   };
 
   const handleSubmit = methods.handleSubmit((data) => {
-    console.log(data);
-
-    console.error(data);
     const resultPromise = signUpUser(data.email, data.password);
     resultPromise
       .then((result) => {
         if (result) {
-          console.log("Sign-Up is successful!");
           setIsOpened(false);
           setAuthenticatedUser(data.email);
           methods.reset();
@@ -54,7 +48,8 @@ export default function SignUpModal() {
   });
 
   return (
-    authenticatedUser === NONE_AUTHENTICATED_USER && (
+    authenticatedUser === NONE_AUTHENTICATED_USER &&
+    isOpened && (
       <FormProvider {...methods}>
         <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
           <form className={styles.form} onSubmit={handleSubmit}>

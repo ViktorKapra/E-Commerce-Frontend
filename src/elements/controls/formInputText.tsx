@@ -1,6 +1,5 @@
 import { FieldValues, RegisterOptions, useFormContext } from "react-hook-form";
-import findInputError from "@/helpers/findInputError";
-import isFormInvalid from "@/helpers/isFormValid";
+import { findInputError, isFormInvalid } from "@/helpers/utils";
 import clsx from "clsx";
 import * as styles from "./formInputText.m.scss";
 

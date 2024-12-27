@@ -6,7 +6,7 @@ import { useAuth } from "@/helpers/context/authContext";
 import { HOME_PAGE } from "@/routing/links";
 import { FormProvider, useForm } from "react-hook-form";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
-import { emailValidation, passwordValidation } from "@/helpers/formValidation";
+import { emailValidation, passwordValidation } from "@/helpers/utils";
 import { useSignIn } from "@/helpers/context/signInContext";
 import * as styles from "./signInModal.m.scss";
 
@@ -25,14 +25,10 @@ export default function SignInModal() {
   };
 
   const handleSubmit = methods.handleSubmit((data) => {
-    console.log(data);
-
-    console.error(data);
     const resultPromise = signInUser(data.email, data.password);
     resultPromise
       .then((result) => {
         if (result) {
-          console.log("Sign-In is successful!");
           setIsOpened(false);
           setAuthenticatedUser(data.email);
           methods.reset();
