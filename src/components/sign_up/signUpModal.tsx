@@ -1,16 +1,18 @@
 import FormInputText from "@/elements/controls/formInputText";
 import Modal from "@/elements/modal/modal";
 import { signUpUser } from "@/api/auth";
-import { useAuth } from "@/helpers/context/authContext";
 import { Field, FormProvider, RegisterOptions, useForm } from "react-hook-form";
 import NONE_AUTHENTICATED_USER from "@/helpers/constants";
 import { emailValidation, passwordValidation } from "@/helpers/utils";
 import { useNavigate } from "react-router";
 import { USER_PAGE } from "@/routing/links";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { authenticate, selectAuthUser } from "@/redux/features/authUserSlice";
 import * as styles from "./signUp.m.scss";
 
 export default function SignUpModal({ isOpened, setIsOpened }: { isOpened: boolean; setIsOpened: (value: boolean) => void }) {
-  const { authenticatedUser, setAuthenticatedUser } = useAuth();
+  const authenticatedUser = useAppSelector(selectAuthUser);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const methods = useForm();
@@ -35,7 +37,7 @@ export default function SignUpModal({ isOpened, setIsOpened }: { isOpened: boole
       .then((result) => {
         if (result) {
           setIsOpened(false);
-          setAuthenticatedUser(data.email);
+          dispatch(authenticate(data.email));
           methods.reset();
           navigate(USER_PAGE);
         } else {

@@ -4,21 +4,23 @@ import clsx from "clsx";
 import LOG_OUT_ICON from "@/assets/images/icons/logout.png";
 import SHOPPING_CART_ICON from "@/assets/images/icons/shoppingCart.png";
 import USER_ICON from "@/assets/images/icons/userIcon.png";
-import { useAuth } from "@/helpers/context/authContext";
-import { useSignIn } from "@/helpers/context/signInContext";
 import SignInModal from "@/components/sign_in/signInModal";
 import SignUpModal from "@/components/sign_up/signUpModal";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectAuthUser, logout } from "@/redux/features/authUserSlice";
+import { openSignIn } from "@/redux/features/signInSlice";
 import ProductDropDownMenu from "./productDropDownMenu";
 import * as styles from "./navbar.m.scss";
 
 export default function Navbar() {
-  const { authenticatedUser, setAuthenticatedUser } = useAuth();
-  const { setIsSignInModalOpen } = useSignIn();
+  const authenticatedUser = useAppSelector(selectAuthUser);
+  const dispatch = useAppDispatch();
+
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   const openSignInModal = () => {
-    setIsSignInModalOpen(true);
+    dispatch(openSignIn());
   };
 
   const openSignUpModal = () => {
@@ -46,7 +48,7 @@ export default function Navbar() {
           <NavLink
             to={SING_OUT}
             className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })}
-            onClick={() => setAuthenticatedUser("")}
+            onClick={() => dispatch(logout())}
             end
           >
             <img src={LOG_OUT_ICON} alt="Log out" />
