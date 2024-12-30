@@ -13,7 +13,6 @@ const initialState: SignInOpenState = {
 
 export const signInOpenSlice = createSlice({
   name: "signInOpen",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     openSignIn: (state) => {
@@ -26,8 +25,5 @@ export const signInOpenSlice = createSlice({
 });
 
 export const { openSignIn, closeSignIn } = signInOpenSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
 export const selectSignInOpen = (state: RootState) => state.signInOpen.value;
-
 export default signInOpenSlice.reducer;

@@ -50,8 +50,7 @@ export default function SignUpModal({ isOpened, setIsOpened }: { isOpened: boole
   });
 
   return (
-    authenticatedUser === NONE_AUTHENTICATED_USER &&
-    isOpened && (
+    authenticatedUser === NONE_AUTHENTICATED_USER && (
       <FormProvider {...methods}>
         <Modal open={isOpened} handleClose={handleUnsuccessfulClose}>
           <form className={styles.form} onSubmit={handleSubmit}>
