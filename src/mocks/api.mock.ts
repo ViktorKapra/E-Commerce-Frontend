@@ -67,4 +67,8 @@ export default webpackMockServer.add((app) => {
     console.log(_req.body);
     return res.status(204).json();
   });
+  app.patch(apiEndpoints.changePassword, (_req, res) => {
+    console.log(_req.body);
+    return res.status(200).json();
+  });
 });

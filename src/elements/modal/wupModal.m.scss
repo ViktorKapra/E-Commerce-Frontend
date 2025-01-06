@@ -1,0 +1,33 @@
+.ctrl {
+  // override here only element-specific styles. Common styles override in main.scss
+  --base-btn-size: 60px;
+  --icon-size: 100%;
+  --icon-background: white;
+}
+
+wup-modal {
+  > button[close] {
+    --icon-img: url("images/icons/close.svg");
+    color: white;
+    --icon-size: 100%;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    right: 30px;
+  }
+}
+
+[wup-icon] {
+  &:first-child {
+    &:after {
+      background: $primaryWhite;
+      border-radius: 0;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 0.5;
+      }
+    }
+  }
+}

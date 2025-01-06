@@ -4,6 +4,7 @@ const apiEndpoints = {
   searchProducts: "/api/search/",
   signIn: "/api/auth/signIn",
   signUp: "/api/auth/signUp",
+  changePassword: "/api/user/password",
 };
 
 export default apiEndpoints;
