@@ -12,21 +12,26 @@ export default function ChangePassword() {
 
   return (
     <ModalWUP className={styles.wupModal}>
-      <Form className={styles.formd} onSubmit={submitForm}>
-        <h2 className={styles.title}> Change password</h2>
-        <div className={styles.container}>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label className={styles.label}> Password</label>
-          <PasswordControl
-            className={styles.password}
-            name="password"
-            validations={{ required: true, min: 8, minNumber: 1, minUpper: 1, minLower: 1 }}
-          />
-        </div>
-        <div className={styles.container}>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label className={styles.label}> Repeat Password</label>
-          <PasswordControl name="repeatPassword" validations={{ confirm: true }} />
+      <Form onSubmit={submitForm}>
+        <div className={styles.contentWrapper}>
+          <h2 className={styles.title}> Change password</h2>
+          <div className={styles.container}>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label className={styles.label}> Password</label>
+            <PasswordControl
+              className={styles.password}
+              name="password"
+              validations={{ required: true, min: 8, minNumber: 1, minUpper: 1, minLower: 1 }}
+            />
+          </div>
+          <div className={styles.container}>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label className={styles.label}> Repeat Password</label>
+            <PasswordControl name="repeatPassword" validations={{ confirm: true, required: true }} />
+          </div>
+          <button className={styles.button} type="submit">
+            Submit
+          </button>
         </div>
       </Form>
     </ModalWUP>

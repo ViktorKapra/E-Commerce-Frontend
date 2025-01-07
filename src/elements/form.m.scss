@@ -1,11 +1,13 @@
 .form {
   font: inherit;
+  margin: 0;
 
-  > button[type="submit"] {
+  button[type="submit"] {
     background-color: $primaryPurple;
     color: $primaryWhite;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    margin: 0;
   }
 }
