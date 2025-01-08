@@ -102,10 +102,10 @@ export default function UserPage() {
                   <button id="changePasswordButton" className={styles.button} type="button">
                     Change password
                   </button>
-                  <ChangePasswordModal />
                 </div>
               </div>
             </Form>
+            <ChangePasswordModal />
             <NotifyElement openElement={notify} title="Update succeeded" />
           </>
         )}

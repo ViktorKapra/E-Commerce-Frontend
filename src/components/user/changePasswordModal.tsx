@@ -6,8 +6,12 @@ import * as styles from "./changePasswordModal.m.scss";
 
 export default function ChangePasswordModal() {
   const submitForm = (ev: WUP.Form.EventMap["$submit"]) => {
-    const { password } = ev.detail.model;
-    changePassword(password).then((r) => (r ? console.log("Password changed") : alert("Unable to change password")));
+    if (ev.detail.relatedForm.$isValid) {
+      const { password } = ev.detail.model;
+      changePassword(password).then((r) => (r ? console.log("Password changed") : alert("Unable to change password")));
+    } else {
+      ev.preventDefault();
+    }
   };
 
   return (
