@@ -2,9 +2,9 @@ import Form from "@/elements/form";
 import PasswordControl from "@/elements/controls/password";
 import ModalWUP from "@/elements/modal/wupModal";
 import changePassword from "@/api/profile";
-import * as styles from "./changePassword.m.scss";
+import * as styles from "./changePasswordModal.m.scss";
 
-export default function ChangePassword() {
+export default function ChangePasswordModal() {
   const submitForm = (ev: WUP.Form.EventMap["$submit"]) => {
     const { password } = ev.detail.model;
     changePassword(password).then((r) => (r ? console.log("Password changed") : alert("Unable to change password")));

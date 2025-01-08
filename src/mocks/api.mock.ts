@@ -52,7 +52,7 @@ const mockData = {
 const mockUserData: UserInfo = {
   username: "Will",
   addressDelivery: "New York",
-  phoneNumber: "+1234567890",
+  phoneNumber: "+123456789000",
   profilePicture: "https://res.cloudinary.com/dryqravgn/image/upload/v1736173943/noPhoto_zwwckv.jpg",
 };
 

@@ -6,7 +6,10 @@ WUPNotifyElement.$use();
 
 interface Props extends BaseControlProps<WUP.Notify.Options> {
   openElement: boolean;
+  title: string;
 }
+
+type NotifyElementType = WUPNotifyElement<WUP.Notify.Options, WUP.Notify.EventMap>;
 
 export default class NotifyElement extends BaseWUP<WUPNotifyElement, Props> {
   updateOptions(nextProps: Props, _isInit: boolean) {
@@ -30,8 +33,18 @@ export default class NotifyElement extends BaseWUP<WUPNotifyElement, Props> {
         content="Profile updated"
         class={`${props.className}`.trim()}
       >
-        <p> Update succeeded</p>
+        <p> {this.props.title}</p>
       </wup-notify>
     );
+  }
+
+  render(): JSX.Element {
+    return this.goRender({
+      class: this.props.className,
+      ref: (el: NotifyElementType) => {
+        this.domEl = el || (this.domEl as WUPNotifyElement) || ({} as WUP.Notify.Options);
+      },
+      title: this.props.title,
+    });
   }
 }

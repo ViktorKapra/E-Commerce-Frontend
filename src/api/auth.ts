@@ -1,5 +1,9 @@
 import apiEndpoints from "@/api.endpoints";
 
+function setAuthUser(user: string): void {
+  localStorage.setItem("authUser", user);
+}
+
 export async function signInUser(email: string, password: string): Promise<boolean> {
   const url = apiEndpoints.signIn; // "https://localhost:7240/api/auth/signIn";
   const response = await fetch(url, {
@@ -9,6 +13,7 @@ export async function signInUser(email: string, password: string): Promise<boole
   });
 
   if (response.ok) {
+    setAuthUser(email);
     return true;
   }
   if (response.status === 401) {
@@ -27,6 +32,7 @@ export async function signUpUser(email: string, password: string): Promise<boole
   });
 
   if (response.ok) {
+    setAuthUser(email);
     return true;
   }
   if (response.status === 401) {

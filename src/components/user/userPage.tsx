@@ -2,12 +2,12 @@ import NamedSectionForElements from "@/elements/sections/namedSectionForElements
 import NO_PHOTO_IMAGE from "@/assets/images/noPhoto.jpg";
 import TextControl from "@/elements/controls/text";
 import { useEffect, useState } from "react";
-import ChangePassword from "@/components/user/changePassword";
+import ChangePasswordModal from "@/components/user/changePasswordModal";
 import Form from "@/elements/form";
 import TextArea from "@/elements/controls/textArea";
 import { getUser, saveProfile } from "@/api/profile";
 import UserInfo from "@/types/user.types";
-import NotifyElement from "@/components/user/notify";
+import NotifyElement from "@/elements/controls/notify";
 import * as styles from "./userPage.m.scss";
 
 export default function UserPage() {
@@ -47,7 +47,7 @@ export default function UserPage() {
       phoneNumber: e.detail.model.phoneNumber,
       profilePicture: image,
     };
-
+    console.log(updatedInfo);
     saveProfile(updatedInfo)
       .then((success) => {
         if (success) {
@@ -78,16 +78,22 @@ export default function UserPage() {
               <div className={styles.styleContainer}>
                 <div className={styles.inputsContainer}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className={styles.label}>Username</label>
-                  <TextControl name="username" value={model.username} validations={{ required: true }} />
+                  <label className={styles.label}>Username*</label>
+                  <TextControl name="username" label="" value={model.username} validations={{ required: true }} />
 
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className={styles.label}>Address delivery</label>
-                  <TextArea name="addressDelivery" value={model.addressDelivery} validations={{ required: true }} />
+                  <label className={styles.label}>Address delivery*</label>
+                  <TextArea name="addressDelivery" label="" value={model.addressDelivery} validations={{ required: true }} />
 
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className={styles.label}>Phone number</label>
-                  <TextControl name="phoneNumber" value={model.phoneNumber} validations={{ required: true }} mask="+(000)00-000-0000" />
+                  <label className={styles.label}>Phone number*</label>
+                  <TextControl
+                    name="phoneNumber"
+                    label=""
+                    value={model.phoneNumber}
+                    validations={{ required: true }}
+                    mask="+(000)00-000-0000"
+                  />
                 </div>
                 <div className={styles.buttonHolder}>
                   <button className={styles.button} type="submit">
@@ -97,11 +103,11 @@ export default function UserPage() {
                   <button id="changePasswordButton" className={styles.button} type="button">
                     Change password
                   </button>
-                  <ChangePassword />
+                  <ChangePasswordModal />
                 </div>
               </div>
             </Form>
-            <NotifyElement openElement={notify} />
+            <NotifyElement openElement={notify} title="Update succeeded" />
           </>
         )}
       </NamedSectionForElements>

@@ -58,19 +58,20 @@ wup-textarea {
 }
 
 .img {
-  width: 250px;
-  height: 300px;
+  width: 200px;
+  height: 250px;
 }
 
 .button,
 .fileUploadLabel {
+  font-weight: bold;
   height: 40px;
   width: 100%;
   min-width: 50px;
   border-width: 0;
   border-radius: 10px;
   color: $primaryWhite;
-  background-color: $transparentPurple;
+  background-color: $primaryPurple;
 }
 
 .button:hover,
