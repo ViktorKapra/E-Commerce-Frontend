@@ -47,7 +47,6 @@ export default function UserPage() {
       phoneNumber: e.detail.model.phoneNumber,
       profilePicture: image,
     };
-    console.log(updatedInfo);
     saveProfile(updatedInfo)
       .then((success) => {
         if (success) {
@@ -91,7 +90,7 @@ export default function UserPage() {
                     name="phoneNumber"
                     label=""
                     value={model.phoneNumber}
-                    validations={{ required: true }}
+                    validations={{ required: true, min: 13 }}
                     mask="+(000)00-000-0000"
                   />
                 </div>
