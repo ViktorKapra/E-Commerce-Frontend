@@ -10,6 +10,7 @@ interface Props extends React.PropsWithChildren<Partial<WUP.Form.Options>> {
   initModel?: WUPFormElement["$initModel"];
   model?: WUPFormElement["$model"];
   onSubmit?: WUPFormElement["$onSubmit"];
+  onSubmitEnd?: WUPFormElement["$onSubmitEnd"];
 }
 
 export default class Form extends BaseWUP<WUPFormElement, Props> {
@@ -24,13 +25,15 @@ export default class Form extends BaseWUP<WUPFormElement, Props> {
     if (isInit || nextProps.initModel !== this.props.initModel) {
       this.domEl.$initModel = nextProps.initModel; // update only if value changed
     }
+    if (isInit || nextProps.onSubmitEnd !== this.props.onSubmitEnd) {
+      this.domEl.$onSubmitEnd = nextProps.onSubmitEnd;
+    }
   }
 
   goRender(props: Record<string, unknown>): JSX.Element {
     return (
       <wup-form {...props} class={`${styles.form} ${props.className}`.trim()}>
         {this.props.children}
-        <button type="submit">Submit</button>
       </wup-form>
     );
   }

@@ -1,0 +1,88 @@
+.section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+wup-text,
+wup-textarea {
+  color: $primaryWhite;
+  border-radius: 0;
+  background-color: inherit;
+}
+
+.styleContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.imageContainer {
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputsContainer {
+  max-width: 200px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttonHolder {
+  max-width: 200px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputUpload {
+  display: none;
+}
+
+.fileUploadLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  width: 200px;
+  height: 250px;
+}
+
+.button,
+.fileUploadLabel {
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  min-width: 50px;
+  border-width: 0;
+  border-radius: 10px;
+  color: $primaryWhite;
+  background-color: $primaryPurple;
+}
+
+.button:hover,
+.button:focus,
+.fileUploadLabel:hover,
+.fileUploadLabel:focus {
+  background-color: $primaryPurpleLighten;
+  cursor: pointer;
+}
+
+.label {
+  font-size: 18px;
+  color: $primaryWhite;
+}

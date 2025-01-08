@@ -22,7 +22,10 @@ export default function Navbar() {
   const openSignInModal = () => {
     dispatch(openSignIn());
   };
-
+  const logoutUser = () => {
+    dispatch(logout());
+    localStorage.removeItem("authUser");
+  };
   const openSignUpModal = () => {
     setIsSignUpModalOpen(true);
   };
@@ -48,7 +51,7 @@ export default function Navbar() {
           <NavLink
             to={SING_OUT}
             className={({ isActive }) => clsx(styles.navButton, { [styles.navButtonActive]: isActive })}
-            onClick={() => dispatch(logout())}
+            onClick={logoutUser}
             end
           >
             <img src={LOG_OUT_ICON} alt="Log out" />

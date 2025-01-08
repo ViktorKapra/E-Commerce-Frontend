@@ -2,6 +2,7 @@
 
 import webpackMockServer from "webpack-mock-server";
 import { Game } from "@/types/game.types";
+import UserInfo from "@/types/user.types";
 import apiEndpoints from "../api.endpoints";
 
 const mockDataGames: Game[] = [
@@ -48,8 +49,16 @@ const mockData = {
   email: "willsmith321@gmail.com",
 };
 
+const mockUserData: UserInfo = {
+  username: "Will",
+  addressDelivery: "New York",
+  phoneNumber: "+123456789000",
+  profilePicture: "https://res.cloudinary.com/dryqravgn/image/upload/v1736173943/noPhoto_zwwckv.jpg",
+};
+
 export default webpackMockServer.add((app) => {
   app.get(apiEndpoints.testMock, (_req, res) => res.json(mockData));
+  // Products API
   app.get(apiEndpoints.topProducts, (_req, res) => res.json(mockDataGames));
   app.get(`${apiEndpoints.searchProducts}:text`, (req, res) => {
     const { text } = req.params;
@@ -59,12 +68,22 @@ export default webpackMockServer.add((app) => {
     }
     return res.status(400).send("Invalid search text");
   });
+
+  // User API
   app.post(apiEndpoints.signIn, (_req, res) => {
     console.log(_req.body);
     return res.status(204).json();
   });
   app.post(apiEndpoints.signUp, (_req, res) => {
     console.log(_req.body);
+    return res.status(204).json();
+  });
+  app.patch(apiEndpoints.changePassword, (_req, res) => {
+    console.log(_req.body);
+    return res.status(200).json();
+  });
+  app.get(apiEndpoints.getUserInfo, (_req, res) => res.json(mockUserData));
+  app.post(apiEndpoints.saveProfile, (_req, res) => {
     return res.status(204).json();
   });
 });

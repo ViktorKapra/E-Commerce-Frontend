@@ -16,5 +16,7 @@ $hooverBackgroundColor: color.adjust($primaryBlack, $lightness: 40%);
 $primaryPurple: #9a33cc;
 $secondaryPurple: #562370;
 $primaryPurpleLighten: color.adjust($primaryPurple, $lightness: 10%);
+$secondaryPurpleLighten: color.adjust($secondaryPurple, $lightness: 10%);
+$transparentPurple: rgba(154, 51, 204, 0.5);
 // footer
 $footerBorderColor: #9a33cb;
