@@ -11,6 +11,7 @@ import * as styles from "./productPage.m.scss";
 export default function ProductPage() {
   const params = useParams();
   const { content, loading, filter, searchByTitle } = useGameContentManagement();
+
   const category = typeof params.category !== "undefined" && params.category ? params.category : "No category";
   function chooseTitle(param: string) {
     if (param === "pc") return "PC";
