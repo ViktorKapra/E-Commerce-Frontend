@@ -44,7 +44,18 @@ export default function HomePage() {
   return (
     <section className={styles.section}>
       <div>
-        <SearchBar searchedItems={searchedGames} setSearchedItems={setSearchedGames} fetchSearchItems={getSearchGames} />
+        <SearchBar
+          searchedItems={searchedGames}
+          updateItems={(text: string) => {
+            if (text !== "") {
+              getSearchGames(text).then((res) => {
+                setSearchedGames(res);
+              });
+            } else {
+              setSearchedGames([]);
+            }
+          }}
+        />
         <div className={styles.searchResults}>
           {searchedGames.length > 0
             ? searchedGames.map((game) => (

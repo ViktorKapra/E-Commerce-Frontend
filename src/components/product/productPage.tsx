@@ -1,21 +1,17 @@
 import { useParams } from "react-router";
 import NamedSectionForElements from "@/elements/sections/namedSectionForElements";
-import { Suspense } from "react";
-import useGameFilter from "@/helpers/custom_hooks/useGameFilter";
 import FilterRadioButton from "@/elements/controls/filterRadioButton";
 import { GENRES, AGE_RATINGS } from "@/helpers/constants";
 import { Game } from "@/types/game.types";
 import SearchBar from "@/elements/controls/searchBar";
-import useContentManagement from "@/helpers/custom_hooks/useContentManagement";
-import { getSearchGames } from "@/api/game";
+import useGameContentManagement from "@/helpers/custom_hooks/useGameContentManagement";
 import GameCard from "@/components/game/gameCard";
 import * as styles from "./productPage.m.scss";
 
 export default function ProductPage() {
   const params = useParams();
-  const contentManager = useContentManagement<Game>();
+  const { content, loading, filter, searchByTitle } = useGameContentManagement();
   const category = typeof params.category !== "undefined" && params.category ? params.category : "No category";
-  const filter = useGameFilter(contentManager.setContent);
   function chooseTitle(param: string) {
     if (param === "pc") return "PC";
     if (param === "playstaton") return "Playstation 5";
@@ -44,7 +40,6 @@ export default function ProductPage() {
               label="All genres"
               onChange={() => filter.setGenre(GENRES.ALL)}
             />
-            <br />
             <FilterRadioButton
               value={GENRES.SHOOTER}
               checked={filter.genre === GENRES.SHOOTER}
@@ -52,7 +47,6 @@ export default function ProductPage() {
               label="Shooter"
               onChange={() => filter.setGenre(GENRES.SHOOTER)}
             />
-            <br />
             <FilterRadioButton
               value={GENRES.ARCADE}
               checked={filter.genre === GENRES.ARCADE}
@@ -60,7 +54,6 @@ export default function ProductPage() {
               label="Arcade"
               onChange={() => filter.setGenre(GENRES.ARCADE)}
             />
-            <br />
             <FilterRadioButton
               value={GENRES.SURVIVAL}
               checked={filter.genre === GENRES.SURVIVAL}
@@ -109,15 +102,9 @@ export default function ProductPage() {
         </NamedSectionForElements>
       </div>
       <div className={styles.productContainer}>
-        <SearchBar searchedItems={contentManager.content} setSearchedItems={contentManager.setContent} fetchSearchItems={getSearchGames} />
+        <SearchBar searchedItems={content} updateItems={searchByTitle} />
         <NamedSectionForElements name="Products">
-          <Suspense fallback={<h1> Loading </h1>}>
-            {contentManager.loading ? (
-              <p>Loading...</p>
-            ) : (
-              contentManager.content.map((game: Game) => <GameCard game={game} key={game.id} />)
-            )}
-          </Suspense>
+          {loading ? <p>Loading...</p> : content.map((game: Game) => <GameCard game={game} key={game.id} />)}
         </NamedSectionForElements>
       </div>
     </section>

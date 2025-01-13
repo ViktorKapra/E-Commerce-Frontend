@@ -121,6 +121,7 @@ export default webpackMockServer.add((app) => {
         return a[criteria as keyof Game] < b[criteria as keyof Game] ? 1 : -1;
       })
       .slice(+offset, +offset + +limit);
+
     return res.json(matchedGames);
   });
 
