@@ -112,7 +112,7 @@ export default webpackMockServer.add((app) => {
       .filter(
         (game) =>
           (genre === "all" || game.genre.toLowerCase().includes(genre.toString().toLowerCase())) &&
-          (age === "all" || game.rating.toLowerCase().includes(age.toString().toLowerCase())),
+          (age === "all" || game.rating.toLowerCase() === age.toString().toLowerCase()),
       )
       .sort((a, b) => {
         if (type === "asc") {

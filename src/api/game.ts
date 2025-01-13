@@ -42,7 +42,8 @@ export async function getListGames(
   limit: number,
 ): Promise<Game[]> {
   try {
-    const url = `${apiEndpoints.listProducts}?genre=${genre}&age=${age}&criteria=${criteria}&type=${type}&offset=${offset}&limit=${limit}`;
+    const params = new URLSearchParams({ genre, age, criteria, type, offset: offset.toString(), limit: limit.toString() });
+    const url = `${apiEndpoints.listProducts}?${params}`;
     const response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {
