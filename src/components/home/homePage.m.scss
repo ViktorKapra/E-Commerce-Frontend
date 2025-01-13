@@ -5,3 +5,15 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.searchResults {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > button {
+    width: 100%;
+    max-width: 600px;
+  }
+}

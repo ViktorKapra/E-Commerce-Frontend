@@ -11,7 +11,7 @@ const mockDataGames: Game[] = [
     name: "Overwatch",
     description: "Description for game 1",
     price: 23.99,
-
+    genre: "Shooter",
     image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/overwatch_yosx4o.jpg",
     platforms: ["PC"],
     dateCreated: new Date("2016-5-24"),
@@ -23,6 +23,7 @@ const mockDataGames: Game[] = [
     name: "MineCraft",
     description: "Description for game 2",
     price: 25.99,
+    genre: "Survival",
     image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/minecraft_xfzfix.jpg",
     platforms: ["PC", "XBox One", "Playstation 5"],
     dateCreated: new Date("2009-5-19"),
@@ -34,11 +35,48 @@ const mockDataGames: Game[] = [
     name: "Terraria",
     description: "Description for game 2",
     price: 5.99,
+    genre: "Survival",
     image: "https://res.cloudinary.com/dryqravgn/image/upload/v1733950219/terraria_plvw5o.jpg",
     platforms: ["PC", "XBox One", "Playstation 5"],
     dateCreated: new Date("2011-5-19"),
     totalRating: 4.5,
     rating: "6+",
+  },
+  {
+    id: 4,
+    name: "Sims 4",
+    description: "Description for game 4",
+    price: 15.99,
+    genre: "Arcade",
+    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1736690280/sims4_bclpqi.jpg",
+    platforms: ["PC", "XBox One", "Playstation 5"],
+    dateCreated: new Date("2014-5-19"),
+    totalRating: 4.5,
+    rating: "12+",
+  },
+  {
+    id: 5,
+    name: "Counter Strike",
+    description: "Description for game 5",
+    price: 3.99,
+    genre: "Shooter",
+    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1736690266/cs_fnzcvs.jpg",
+    platforms: ["PC", "XBox One", "Playstation 5"],
+    dateCreated: new Date("2018-5-19"),
+    totalRating: 4.5,
+    rating: "12+",
+  },
+  {
+    id: 6,
+    name: "Battlefield 1",
+    description: "Description for game 6",
+    price: 8.99,
+    genre: "Shooter",
+    image: "https://res.cloudinary.com/dryqravgn/image/upload/v1736690260/battlefield1_et2vsb.jpg",
+    platforms: ["PC", "XBox One", "Playstation 5"],
+    dateCreated: new Date("2018-5-19"),
+    totalRating: 4.5,
+    rating: "18+",
   },
 ];
 
@@ -67,6 +105,24 @@ export default webpackMockServer.add((app) => {
       return res.json(matchedGames.slice(0, 5));
     }
     return res.status(400).send("Invalid search text");
+  });
+  app.get(`${apiEndpoints.listProducts}`, (req, res) => {
+    const { genre = "all", age = "all", criteria = "name", type = "asc", offset = "0", limit = "10" } = req.query;
+    const matchedGames = mockDataGames
+      .filter(
+        (game) =>
+          (genre === "all" || game.genre.toLowerCase().includes(genre.toString().toLowerCase())) &&
+          (age === "all" || game.rating.toLowerCase() === age.toString().toLowerCase()),
+      )
+      .sort((a, b) => {
+        if (type === "asc") {
+          return a[criteria as keyof Game] > b[criteria as keyof Game] ? 1 : -1;
+        }
+        return a[criteria as keyof Game] < b[criteria as keyof Game] ? 1 : -1;
+      })
+      .slice(+offset, +offset + +limit);
+
+    return res.json(matchedGames);
   });
 
   // User API

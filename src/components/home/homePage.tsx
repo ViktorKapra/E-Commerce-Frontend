@@ -8,11 +8,12 @@ import GameCard from "@/components/game/gameCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Game } from "@/types/game.types";
-import { getTopGames } from "@/api/game";
-import HomeSearchBar from "@/components/home/homeSearchBar";
+import { getSearchGames, getTopGames } from "@/api/game";
+import SearchBar from "@/elements/controls/searchBar";
 import * as styles from "./homePage.m.scss";
 
 export default function HomePage() {
+  const [searchedGames, setSearchedGames] = useState<Game[]>([]);
   const [latestGames, setLatestGames] = useState<Game[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -32,6 +33,16 @@ export default function HomePage() {
 
   const navigate = useNavigate();
 
+  const searchGamesByTitle = (text: string) => {
+    if (text !== "") {
+      getSearchGames(text).then((res) => {
+        setSearchedGames(res);
+      });
+    } else {
+      setSearchedGames([]);
+    }
+  };
+
   const handleClick = (selectedValue: string) => {
     console.log("Product category", selectedValue, "was selected");
 
@@ -42,7 +53,18 @@ export default function HomePage() {
 
   return (
     <section className={styles.section}>
-      <HomeSearchBar />
+      <div>
+        <SearchBar searchedItems={searchedGames} updateItems={searchGamesByTitle} />
+        <div className={styles.searchResults}>
+          {searchedGames.length > 0
+            ? searchedGames.map((game) => (
+                <button className={styles.resultContainer} type="submit" key={game.id} onClick={() => alert(`Got product ${game.name}`)}>
+                  {game.name}
+                </button>
+              ))
+            : null}
+        </div>
+      </div>
       <NamedSectionForElements name="Categories">
         <CategoryButton key="pc_button" src={PC_LOGO} category="PC" onClick={() => handleClick(PC)} />
         <CategoryButton key="xbox_button" src={XBOX_LOGO} category="XBox One" onClick={() => handleClick(XBOX)} />

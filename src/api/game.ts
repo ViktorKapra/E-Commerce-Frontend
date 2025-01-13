@@ -33,3 +33,27 @@ export async function getSearchGames(text: string): Promise<Game[]> {
     return Promise.reject(Error("Unable to fetch."));
   }
 }
+export async function getListGames(
+  genre: string,
+  age: string,
+  criteria: keyof Game,
+  type: "asc" | "desc",
+  offset: number,
+  limit: number,
+): Promise<Game[]> {
+  try {
+    const params = new URLSearchParams({ genre, age, criteria, type, offset: offset.toString(), limit: limit.toString() });
+    const url = `${apiEndpoints.listProducts}?${params}`;
+    const response = await fetch(url, { method: "GET" });
+
+    if (!response.ok) {
+      console.log(`HTTP error! status: ${response.status}`);
+      return Promise.reject(new Error("Unable to fetch."));
+    }
+    const data: Game[] = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Error fetching data:", error);
+    return Promise.reject(Error("Unable to fetch."));
+  }
+}
