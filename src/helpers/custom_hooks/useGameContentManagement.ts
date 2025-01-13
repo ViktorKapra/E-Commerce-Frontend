@@ -19,18 +19,22 @@ export default function useGameContentManagement() {
         console.error(err);
       });
   }
+
+  function searchByFilter() {
+    const fetchContent = getListGames(filter.genre, filter.age, filter.criteria, filter.type, filter.offset, filter.limit);
+    fetchWrapper(fetchContent);
+  }
   function searchByTitle(text: string) {
     if (text !== "") {
       const fetchContent = getSearchGames(text);
       fetchWrapper(fetchContent);
     } else {
-      setContent([]);
+      searchByFilter();
     }
   }
 
   useEffect(() => {
-    const fetchContent = getListGames(filter.genre, filter.age, filter.criteria, filter.type, filter.offset, filter.limit);
-    fetchWrapper(fetchContent);
+    searchByFilter();
   }, [filter.genre, filter.age, filter.criteria, filter.type, filter.offset, filter.limit]);
 
   return { content, loading, filter, searchByTitle };

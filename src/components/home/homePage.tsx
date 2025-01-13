@@ -33,6 +33,16 @@ export default function HomePage() {
 
   const navigate = useNavigate();
 
+  const searchGamesByTitle = (text: string) => {
+    if (text !== "") {
+      getSearchGames(text).then((res) => {
+        setSearchedGames(res);
+      });
+    } else {
+      setSearchedGames([]);
+    }
+  };
+
   const handleClick = (selectedValue: string) => {
     console.log("Product category", selectedValue, "was selected");
 
@@ -44,18 +54,7 @@ export default function HomePage() {
   return (
     <section className={styles.section}>
       <div>
-        <SearchBar
-          searchedItems={searchedGames}
-          updateItems={(text: string) => {
-            if (text !== "") {
-              getSearchGames(text).then((res) => {
-                setSearchedGames(res);
-              });
-            } else {
-              setSearchedGames([]);
-            }
-          }}
-        />
+        <SearchBar searchedItems={searchedGames} updateItems={searchGamesByTitle} />
         <div className={styles.searchResults}>
           {searchedGames.length > 0
             ? searchedGames.map((game) => (
